@@ -1,72 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="styles/style.css" />
+  <!-- Compressed CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <title>Popcornpedia</title>
-  </head>
+  <link rel="stylesheet" href="styles/style.css" />
 
-  <body>
-    <div class="callout medium secondary">
-      <div class="row columns text-center">
-        <form>
-          <div>
-            <label class="text-left"><h1>Search for a movie</h1></label>
-            <input
-              type="text"
-              placeholder="(Ex. Wonder Woman, Pulp Fiction, Frozen, etc.)"
-              id="movie-input"
-            />
-          </div>
-          <div class="text-right">
-            <input
-              type="submit"
-              value="Search"
-              class="button alert"
-              id="add-movie"
-            />
-          </div>
-        </form>
-        <div
-          class="row columns small-4 stacked button-group"
-          id="recent-search-btns"
-        ></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <title>Popcornpedia</title>
+</head>
+
+<body>
+  <div class="callout medium secondary">
+    <div class="row columns text-center">
+      <form>
+        <div>
+          <label class="text-left">
+            <h1>Search for a movie</h1>
+          </label>
+          <input type="text" placeholder="(Ex. Wonder Woman, Pulp Fiction, Frozen, etc.)" id="movie-input" />
+        </div>
+        <div class="text-right">
+          <input type="submit" value="Search" class="button alert" id="add-movie" />
+        </div>
+      </form>
+      <div class="row columns small-4 stacked button-group" id="recent-search-btns"></div>
+    </div>
+  </div>
+
+  <div class="row columns medium-10" id="body-container" style="display: none">
+    <div class="media-object" id="movie-info">
+      <div class="media-object-section">
+        <img id="main-film-poster" />
+      </div>
+      <div class="media-object-section">
+        <h3 id="main-film-name"></h3>
+        <p id="main-film-synopsis"></p>
       </div>
     </div>
 
-    <div
-      class="row columns medium-10"
-      id="body-container"
-      style="display: none"
-    >
-      <div class="media-object" id="movie-info">
-        <div class="media-object-section">
-          <img id="main-film-poster" />
-        </div>
-        <div class="media-object-section">
-          <h3 id="main-film-name"></h3>
-          <p id="main-film-synopsis"></p>
-        </div>
+    <ul class="tabs" data-active-collapse="true" data-tabs id="main-content">
+      <li class="tabs-title is-active"><a href="#actorsTab" aria-selected="true">Actors</a></li>
+      <li class="tabs-title"><a href="#crewTab">Crew</a></li>
+      <li class="tabs-title"><a href="#filmsTab">Films you may like</a></li>
+    </ul>
+
+    <div class="tabs-content" data-tabs-content="main-content">
+      <div class="tabs-panel is-active" id="actorsTab">
+      </div>
+      <div class="tabs-panel" id="crewTab">
+      </div>
+      <div class="tabs-panel" id="filmsTab">
       </div>
 
-      <div>Actor, crew and similar movie tabs will go here.</div>
     </div>
+  </div>
 
-    <script src="scripts/script.js"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  <script type="text/javascript" src="scripts/script.js"> </script>
+  <!-- Compressed JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+
+</body>
+
 </html>
