@@ -9,6 +9,7 @@ $(document).ready(function () {
     renderRecentSearchBtns(retrieveRecentSearches());
 
     getMovieDetails(movie);
+
   });
 
   $(document).on("click", ".recent-search", getMovieClicked);
@@ -70,8 +71,16 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       renderMainMovie(response);
+      // converting actor string into array
+      var actorArray = response.Actors.split(",");
+      // logging all actors info
+      for (var i = 0; i < actorArray.length; i++) {
+        console.log(getCelebrityInfo(actorArray[i].trim()))
+      };
+
     });
-  }
+
+  };
 
   // getCelebrityInfo("Steven Spielberg");
 
@@ -86,13 +95,13 @@ $(document).ready(function () {
       headers: { "X-Api-Key": apiKey },
       contentType: "application/json",
       success: function (response) {
-        console.log(response[0]);
+        console.log(response);
       },
       error: function ajaxError(jqXHR) {
         console.error("Error: ", jqXHR.responseText);
       },
     });
-  }
+  };
 
   // getSimilarMovies("Frozen");
 
@@ -121,3 +130,8 @@ $(document).ready(function () {
     $("#main-film-synopsis").text(response.Plot);
   }
 });
+
+function populateActorsTab() {
+
+
+};
