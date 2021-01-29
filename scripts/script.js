@@ -76,6 +76,7 @@ $(document).ready(function () {
       // logging all actors info
       for (var i = 0; i < actorArray.length; i++) {
         console.log(getCelebrityInfo(actorArray[i].trim()))
+        console.log(getActorImg(actorArray[i].trim()));
       };
 
     });
@@ -134,4 +135,26 @@ $(document).ready(function () {
 function populateActorsTab() {
 
 
+
+
 };
+// get Actors images
+function  getActorImg(name) {
+var imdbIdUrl = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/" + name,
+  "method": "GET",
+  "headers": {
+    "x-rapidapi-key": "f1b3cbe9c3msh648456feaa198ebp1d2da3jsnc55cec980b8a",
+    "x-rapidapi-host": "imdb-internet-movie-database-unofficial.p.rapidapi.com"
+  }
+};
+
+$.ajax(imdbIdUrl).done(function (imdbIdresponse) {
+  console.log(imdbIdresponse.names[0].image);
+});
+};
+
+
+$(document).foundation();
