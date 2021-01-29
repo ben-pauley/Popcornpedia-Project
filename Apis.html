@@ -170,8 +170,24 @@
       }
     };
 
-    $.ajax(imdbIdUrl).done(function (response) {
+    $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
+      console.log(imdbIdresponse);
+      // OTT details actor bio + titles
+    var peopleId = imdbIdresponse.names[0].id;
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://ott-details.p.rapidapi.com/getcastDetails?peopleid=" + peopleId,
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-key": "f1b3cbe9c3msh648456feaa198ebp1d2da3jsnc55cec980b8a",
+        "x-rapidapi-host": "ott-details.p.rapidapi.com"
+      }
+    };
+
+    $.ajax(settings).done(function (response) {
       console.log(response);
+    });
     });
 
   </script>
