@@ -71,14 +71,16 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       renderMainMovie(response);
+      $("#actorsTab").empty();
       // converting actor string into array
       var actorArray = response.Actors.split(",");
-      // logging all actors info
+    
       for (var i = 0; i < actorArray.length; i++) {
-        console.log(getCelebrityInfo(actorArray[i].trim()))
-        console.log(getActorImg(actorArray[i].trim()));
-      };
+     
+        getActorImg(actorArray, actorArray[i].trim());
 
+      };
+    
     });
 
   };
@@ -132,14 +134,13 @@ $(document).ready(function () {
   }
 });
 
-function populateActorsTab() {
-
-
+function populateActorsTab(actorArray) {
 
 
 };
+
 // get Actors images
-function  getActorImg(name) {
+function  getActorImg(actorArray, name) {
 var imdbIdUrl = {
   "async": true,
   "crossDomain": true,
@@ -152,7 +153,13 @@ var imdbIdUrl = {
 };
 
 $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
-  console.log(imdbIdresponse.names[0].image);
+
+    var newImg = $("<img>");
+    newImg.addClass("thumbnail");
+    newImg.attr({"src": imdbIdresponse.names[0].image, "alt" : imdbIdresponse.names[0].title, "data-tooltip" :"","tabindex": "2", "title" : imdbIdresponse.names[0].title});
+    newImg.css({'width' : '150px' , 'height' : '150px'})
+    $("#actorsTab").append(newImg);
+   
 });
 };
 
