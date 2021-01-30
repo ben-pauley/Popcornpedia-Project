@@ -1,6 +1,6 @@
 $(document).ready(function () {
   renderRecentSearchBtns(retrieveRecentSearches());
-
+  $(document).foundation();
   $("#add-movie").on("click", function (event) {
     event.preventDefault();
 
@@ -70,16 +70,18 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET",
     }).then(function (response) {
+
       renderMainMovie(response);
       $("#actorsTab").empty();
 
       // converting actor string into array
       var actorArray = response.Actors.split(",");
-
+      $(".reveal-overlay").empty();
       for (var i = 0; i < actorArray.length; i++) {
         var actorName = actorArray[i].trim();
-        getActorImg(actorName);
-        getCelebrityInfo(actorName);
+        getActorImg(actorName, i);
+        getCelebrityInfo(actorName, i);
+
       };
 
     });
@@ -88,7 +90,7 @@ $(document).ready(function () {
 
   // getCelebrityInfo("Steven Spielberg");
 
-  function getCelebrityInfo(name) {
+  function getCelebrityInfo(name, i) {
     var apiKey = "Wvx0+onLZFq2287mLWm4CA==38WLOWdjk3UqQ6FZ";
     var queryURL =
       "https://api.celebrityninjas.com/v1/search?limit=1&name=" + name;
@@ -100,6 +102,8 @@ $(document).ready(function () {
       contentType: "application/json",
       success: function (response) {
         console.log(response);
+        actorsModals(name, i);
+        $(document).foundation();
       },
       error: function ajaxError(jqXHR) {
         console.error("Error: ", jqXHR.responseText);
@@ -136,7 +140,7 @@ $(document).ready(function () {
 });
 
 // get Actors images
-function getActorImg(name) {
+function getActorImg(name, i) {
   var imdbIdUrl = {
     "async": true,
     "crossDomain": true,
@@ -151,35 +155,30 @@ function getActorImg(name) {
   $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
 
     var newImg = $("<img>");
-    newImg.addClass("thumbnail actorImg");
-    newImg.attr({ "src": imdbIdresponse.names[0].image, "alt": imdbIdresponse.names[0].title, "data-tooltip": "", "tabindex": "2", "title": imdbIdresponse.names[0].title });
+    newImg.addClass("thumbnail");
+    newImg.attr({ "id": "actorImg" + i, "src": imdbIdresponse.names[0].image, "alt": imdbIdresponse.names[0].title, "data-tooltip": "", "tabindex": "2", "title": imdbIdresponse.names[0].title });
     newImg.css({ 'width': '150px', 'height': '150px' })
     $("#actorsTab").append(newImg);
-    newImg.attr("data-open", "actorInfo");
 
     $(document).foundation();
-
 
   });
 };
 
 
-function actorsModals() {
+function actorsModals(name, i) {
 
   modalDiv = $("<div>");
   modalDiv.addClass("reveal");
-  modalDiv.attr({ "data-reveal": "", "id": "actorInfo" });
-  $(".actorImg").attr("data-open", "actorInfo")
-  $("#actorsTab").append(modalDiv);
+  modalDiv.attr({ "data-reveal": "", "id": "actorInfo0" + i });
+  $("#actorImg" + i).attr("data-open", "actorInfo0" + i)
   modalDiv.append("<h1 id=actorName></h1>");
   modalDiv.append("<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>")
-  $("#actorName").text("test");
+  $("#actorsTab").append(modalDiv);
+  $("#actorName").text(name);
 
 };
 
-actorsModals();
 
 
-
-$(document).foundation();
 
