@@ -74,13 +74,12 @@ $(document).ready(function () {
       $("#actorsTab").empty();
       // converting actor string into array
       var actorArray = response.Actors.split(",");
-    
-      for (var i = 0; i < actorArray.length; i++) {
-     
-        getActorImg(actorArray, actorArray[i].trim());
 
+      for (var i = 0; i < actorArray.length; i++) {
+        var actorName = actorArray[i].trim();
+        getActorImg(actorName);
       };
-    
+     
     });
 
   };
@@ -134,34 +133,48 @@ $(document).ready(function () {
   }
 });
 
-function populateActorsTab(actorArray) {
-
-
-};
-
 // get Actors images
-function  getActorImg(actorArray, name) {
-var imdbIdUrl = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/" + name,
-  "method": "GET",
-  "headers": {
-    "x-rapidapi-key": "f1b3cbe9c3msh648456feaa198ebp1d2da3jsnc55cec980b8a",
-    "x-rapidapi-host": "imdb-internet-movie-database-unofficial.p.rapidapi.com"
-  }
-};
+function getActorImg(name) {
+  var imdbIdUrl = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/" + name,
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-key": "f1b3cbe9c3msh648456feaa198ebp1d2da3jsnc55cec980b8a",
+      "x-rapidapi-host": "imdb-internet-movie-database-unofficial.p.rapidapi.com"
+    }
+  };
 
-$.ajax(imdbIdUrl).done(function (imdbIdresponse) {
+  $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
 
     var newImg = $("<img>");
-    newImg.addClass("thumbnail");
-    newImg.attr({"src": imdbIdresponse.names[0].image, "alt" : imdbIdresponse.names[0].title, "data-tooltip" :"","tabindex": "2", "title" : imdbIdresponse.names[0].title});
-    newImg.css({'width' : '150px' , 'height' : '150px'})
+    newImg.addClass("thumbnail actorImg");
+    newImg.attr({ "src": imdbIdresponse.names[0].image, "alt": imdbIdresponse.names[0].title, "data-tooltip": "", "tabindex": "2", "title": imdbIdresponse.names[0].title });
+    newImg.css({ 'width': '150px', 'height': '150px' })
     $("#actorsTab").append(newImg);
-   
-});
+    newImg.attr("data-open", "actorInfo");
+
+  });
 };
+
+
+function actorsModals() {
+
+  modalDiv = $("<div>");
+  modalDiv.addClass("reveal");
+  modalDiv.attr({ "data-reveal": "", "id": "actorInfo" });
+  $(".actorImg").attr("data-open", "actorInfo")
+  $("#actorsTab").append(modalDiv);
+  modalDiv.append("<h1 id=actorName></h1>");
+  modalDiv.append("<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>")
+  $("#actorName").text("test");
+
+};
+
+actorsModals();
+
 
 
 $(document).foundation();
+
