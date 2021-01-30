@@ -166,7 +166,33 @@ $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
 
 function renderCrewInfo(omdbResponse) {
   var DirectorArray = omdbResponse.Director.split(",");
-  
+
+  var imdbIdUrl = {
+    async: true,
+    crossDomain: true,
+    url:
+      "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/" +
+      name,
+    method: "GET",
+    headers: {
+      "x-rapidapi-key": "f1b3cbe9c3msh648456feaa198ebp1d2da3jsnc55cec980b8a",
+      "x-rapidapi-host":
+        "imdb-internet-movie-database-unofficial.p.rapidapi.com",
+    },
+  };
+  $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
+    var newImg = $("<img>");
+    newImg.addClass("thumbnail");
+    newImg.attr({
+      src: imdbIdresponse.names[0].image,
+      alt: imdbIdresponse.names[0].title,
+      "data-tooltip": "",
+      tabindex: "2",
+      title: imdbIdresponse.names[0].title,
+    });
+    newImg.css({ width: "150px", height: "150px" });
+    $("#crewTab").append(newImg);
+  });
 }
 
 $(document).foundation();
