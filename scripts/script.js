@@ -71,6 +71,7 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       renderMainMovie(response);
+      renderCrewInfo(response);
       $("#actorsTab").empty();
       // converting actor string into array
       var actorArray = response.Actors.split(",");
@@ -80,7 +81,7 @@ $(document).ready(function () {
         getActorImg(actorArray, actorArray[i].trim());
 
       };
-    
+
     });
 
   };
@@ -163,5 +164,9 @@ $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
 });
 };
 
+function renderCrewInfo(omdbResponse) {
+  var DirectorArray = omdbResponse.Director.split(",");
+  
+}
 
 $(document).foundation();
