@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <div class="callout large secondary">
+    <div class="callout medium secondary">
       <div class="row columns text-center">
         <form>
           <div>
@@ -44,7 +44,11 @@
       </div>
     </div>
 
-    <div class="row columns medium-8" style="display: block">
+    <div
+      class="row columns medium-10"
+      id="body-container"
+      style="display: none"
+    >
       <div class="media-object" id="movie-info">
         <div class="media-object-section">
           <img id="main-film-poster" />
@@ -54,6 +58,8 @@
           <p id="main-film-synopsis"></p>
         </div>
       </div>
+
+      <div>Actor, crew and similar movie tabs will go here.</div>
     </div>
 
     <script src="scripts/script.js"></script>
