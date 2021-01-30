@@ -72,14 +72,16 @@ $(document).ready(function () {
     }).then(function (response) {
       renderMainMovie(response);
       $("#actorsTab").empty();
+
       // converting actor string into array
       var actorArray = response.Actors.split(",");
 
       for (var i = 0; i < actorArray.length; i++) {
         var actorName = actorArray[i].trim();
         getActorImg(actorName);
+        getCelebrityInfo(actorName);
       };
-     
+
     });
 
   };
@@ -154,6 +156,9 @@ function getActorImg(name) {
     newImg.css({ 'width': '150px', 'height': '150px' })
     $("#actorsTab").append(newImg);
     newImg.attr("data-open", "actorInfo");
+
+    $(document).foundation();
+
 
   });
 };
