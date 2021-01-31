@@ -101,8 +101,12 @@ $(document).ready(function () {
       headers: { "X-Api-Key": apiKey },
       contentType: "application/json",
       success: function (response) {
-        console.log(response);
-        actorsModals(name, i);
+        
+        var age = response[0].age;
+        var birthday = response[0].birthday;
+        var nationality = response[0].nationality;
+        var occupation = response[0].occupation;
+        actorsModals(name, age, birthday, nationality, occupation, i);
         $(document).foundation();
       },
       error: function ajaxError(jqXHR) {
@@ -166,16 +170,21 @@ function getActorImg(name, i) {
 };
 
 
-function actorsModals(name, i) {
+function actorsModals(name, age, birthday, nationality, occupation, i) {
 
   modalDiv = $("<div>");
-  modalDiv.addClass("reveal");
+  modalDiv.addClass("tiny reveal");
   modalDiv.attr({ "data-reveal": "", "id": "actorInfo0" + i });
   $("#actorImg" + i).attr("data-open", "actorInfo0" + i)
-  modalDiv.append("<h1 id=actorName></h1>");
+  modalDiv.append("<h2 id=actorName></h2>");
+  modalDiv.append("<div id=actorInfo></div>");
   modalDiv.append("<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>")
   $("#actorsTab").append(modalDiv);
   $("#actorName").text(name);
+  $("#actorInfo").html("<b>Age: </b>" + age  + "<br>" +
+  "<b>Birthday : <b/>" + birthday + "<br>" +
+  "<b>Nationality : </b>" + nationality + "<br>" +
+  "<b>Occupation : </b>" + occupation);
 
 };
 
