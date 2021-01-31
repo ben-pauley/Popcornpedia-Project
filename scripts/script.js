@@ -74,9 +74,12 @@ $(document).ready(function () {
       renderMainMovie(response);
       $("#actorsTab").empty();
 
-      // converting actor string into array
+      // Converting actor string into array
       var actorArray = response.Actors.split(",");
+      // Remove modals content
       $(".reveal-overlay").empty();
+
+      // For loop that create actors images and their related infomation 
       for (var i = 0; i < actorArray.length; i++) {
         var actorName = actorArray[i].trim();
         getActorImg(actorName, i);
@@ -101,12 +104,15 @@ $(document).ready(function () {
       headers: { "X-Api-Key": apiKey },
       contentType: "application/json",
       success: function (response) {
-        
+        // Creating variables that hold specific responses from the API
         var age = response[0].age;
         var birthday = response[0].birthday;
         var nationality = response[0].nationality;
         var occupation = response[0].occupation;
+
+        // Calling function that holds actors Modals
         actorsModals(name, age, birthday, nationality, occupation, i);
+
         $(document).foundation();
       },
       error: function ajaxError(jqXHR) {
@@ -136,7 +142,6 @@ $(document).ready(function () {
 
   function renderMainMovie(response) {
     $("#body-container").css("display", "block");
-
     $("#main-film-poster").attr("src", response.Poster);
     $("#main-film-name").text(response.Title + " (" + response.Year + ")");
     $("#main-film-synopsis").text(response.Plot);
@@ -157,7 +162,8 @@ function getActorImg(name, i) {
   };
 
   $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
-
+    console.log(imdbIdresponse);
+    // Creating images for each actor name
     var newImg = $("<img>");
     newImg.addClass("thumbnail");
     newImg.attr({ "id": "actorImg" + i, "src": imdbIdresponse.names[0].image, "alt": imdbIdresponse.names[0].title, "data-tooltip": "", "tabindex": "2", "title": imdbIdresponse.names[0].title });
@@ -172,8 +178,9 @@ function getActorImg(name, i) {
 
 function actorsModals(name, age, birthday, nationality, occupation, i) {
 
+// Creating modals when actors images are clicked
   modalDiv = $("<div>");
-  modalDiv.addClass("tiny reveal");
+  modalDiv.addClass("small reveal");
   modalDiv.attr({ "data-reveal": "", "id": "actorInfo0" + i });
   $("#actorImg" + i).attr("data-open", "actorInfo0" + i)
   modalDiv.append("<h2 id=actorName></h2>");
@@ -181,10 +188,10 @@ function actorsModals(name, age, birthday, nationality, occupation, i) {
   modalDiv.append("<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>")
   $("#actorsTab").append(modalDiv);
   $("#actorName").text(name);
-  $("#actorInfo").html("<b>Age: </b>" + age  + "<br>" +
-  "<b>Birthday : <b/>" + birthday + "<br>" +
-  "<b>Nationality : </b>" + nationality + "<br>" +
-  "<b>Occupation : </b>" + occupation);
+  $("#actorInfo").html("<b>Age: </b>" + age + "<br>" +
+    "<b>Birthday : <b/>" + birthday + "<br>" +
+    "<b>Nationality : </b>" + nationality + "<br>" +
+    "<b>Occupation : </b>" + occupation);
 
 };
 
