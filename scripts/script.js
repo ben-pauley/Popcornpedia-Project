@@ -60,7 +60,7 @@ $(document).ready(function () {
       renderMainMovie(response);
       renderActorsTab(response);
       renderCrewTab(response);
-      getSimilarMovies(movie);
+      renderSimilarMoviesTab(movie);
     });
   }
 
@@ -237,7 +237,7 @@ $(document).ready(function () {
     );
   }
 
-  function getSimilarMovies(movie) {
+  function renderSimilarMoviesTab(movie) {
     $.ajax({
       type: "GET",
       url: "https://tastedive.com/api/similar?limit=4",
@@ -249,32 +249,40 @@ $(document).ready(function () {
         k: "400900-Popcornp-N9NY6GRY",
       },
 
-      success: function (response) {
-        $("#filmsTab").empty();
-
-        for (var i = 0; i < 4; i++) {
-          var queryURL =
-            "https://www.omdbapi.com/?t=" +
-            response.Similar.Results[i].Name +
-            "&apikey=trilogy";
-          $.ajax({
-            url: queryURL,
-            method: "GET",
-          }).then(function (response) {
-            var newImg = $("<img>");
-            newImg.addClass("thumbnail SuggestedFilmImg");
-            newImg.css({ width: "150px", height: "150px" });
-            newImg.attr({
-              src: response.Poster,
-              alt: response.Title,
-              "data-tooltip": "",
-              tabindex: "2",
-              title: response.Title,
-            });
-            $("#filmsTab").append(newImg);
-          });
-        }
+      success: function (tasteDiveResponse) {
+        fetchPosters(tasteDiveResponse);
       },
     });
+  }
+
+  function fetchPosters(tasteDiveResponse) {
+    $("#filmsTab").empty();
+
+    for (var i = 0; i < 4; i++) {
+      var queryURL =
+        "https://www.omdbapi.com/?t=" +
+        tasteDiveResponse.Similar.Results[i].Name +
+        "&apikey=trilogy";
+      $.ajax({
+        url: queryURL,
+        method: "GET",
+      }).then(function (omdbResponse) {
+        displaySimilarMoviePosters(omdbResponse);
+      });
+    }
+  }
+
+  function displaySimilarMoviePosters(omdbResponse) {
+    var newImg = $("<img>");
+    newImg.addClass("thumbnail SuggestedFilmImg");
+    newImg.css({ width: "150px", height: "150px" });
+    newImg.attr({
+      src: omdbResponse.Poster,
+      alt: omdbResponse.Title,
+      "data-tooltip": "",
+      tabindex: "2",
+      title: omdbResponse.Title,
+    });
+    $("#filmsTab").append(newImg);
   }
 });
