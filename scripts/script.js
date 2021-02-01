@@ -49,6 +49,7 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET",
     }).then(function (response) {
+
       renderMainMovie(response);
       $("#actorsTab").empty();
       // Converting actor string into array
@@ -64,6 +65,7 @@ $(document).ready(function () {
       renderCrewTab(response);
     });
   }
+  
   function getCelebrityInfo(name, i) {
     var apiKey = "Wvx0+onLZFq2287mLWm4CA==38WLOWdjk3UqQ6FZ";
     var queryURL =
