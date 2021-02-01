@@ -9,6 +9,7 @@ $(document).ready(function () {
     renderRecentSearchBtns(retrieveRecentSearches());
 
     getMovieDetails(movie);
+    
 
   });
 
@@ -71,6 +72,8 @@ $(document).ready(function () {
       method: "GET",
     }).then(function (response) {
       renderMainMovie(response);
+
+
       $("#actorsTab").empty();
       // converting actor string into array
       var actorArray = response.Actors.split(",");
@@ -79,7 +82,9 @@ $(document).ready(function () {
         var actorName = actorArray[i].trim();
         getActorImg(actorName);
       };
-     
+
+      getSimilarMovies(movie);
+
     });
 
   };
@@ -105,12 +110,13 @@ $(document).ready(function () {
     });
   };
 
-  // getSimilarMovies("Frozen");
+  //getSimilarMovies("Frozen");
 
   function getSimilarMovies(movie) {
+
     $.ajax({
       type: "GET",
-      url: "https://tastedive.com/api/similar?limit=10",
+      url: "https://tastedive.com/api/similar?limit=4",
       jsonp: "callback",
       dataType: "jsonp",
       data: {
@@ -118,8 +124,28 @@ $(document).ready(function () {
         q: movie,
         k: "400900-Popcornp-N9NY6GRY",
       },
+
       success: function (response) {
-        console.log(response.Similar.Results[0]);
+
+        for (var i = 0; i < 4; i++) {
+          console.log(response.Similar.Results[i]);
+          var queryURL = "https://www.omdbapi.com/?t=" + response.Similar.Results[i].Name + "&apikey=trilogy";
+          console.log(response.Similar.Results[i].Name)
+          $.ajax({
+            url: queryURL,
+            method: "GET",
+          }).then(function (response) {
+            console.log(response.Poster);
+
+            var newImg = $("<img>");
+            newImg.addClass("thumbnail SuggestedFilmImg");
+            newImg.attr({ "src": response.Poster, "alt": response.Title, "data-tooltip": "", "tabindex": "2", "title":response.Title});
+            newImg.css({ 'width': '150px', 'height': '150px' })
+            $("#filmsTab").append(newImg);
+            
+        
+          });
+        }
       },
     });
   }
@@ -138,7 +164,7 @@ function getActorImg(name) {
   var imdbIdUrl = {
     "async": true,
     "crossDomain": true,
-    "url": "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/" + name,
+    "url": "https://imdb-internet-movie- database-unofficial.p.rapidapi.com/search/" + name,
     "method": "GET",
     "headers": {
       "x-rapidapi-key": "f1b3cbe9c3msh648456feaa198ebp1d2da3jsnc55cec980b8a",
