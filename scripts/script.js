@@ -51,6 +51,8 @@ $(document).ready(function () {
     }).then(function (response) {
 
       renderMainMovie(response);
+
+
       $("#actorsTab").empty();
       // Converting actor string into array
       var actorArray = response.Actors.split(",");
@@ -62,6 +64,7 @@ $(document).ready(function () {
         getActorImg(actorName, i);
         getCelebrityInfo(actorName, i);
       }
+      getSimilarMovies(movie);
       renderCrewTab(response);
     });
   }
@@ -89,11 +92,11 @@ $(document).ready(function () {
         console.error("Error: ", jqXHR.responseText);
       },
     });
-  }
   function getSimilarMovies(movie) {
+
     $.ajax({
       type: "GET",
-      url: "https://tastedive.com/api/similar?limit=10",
+      url: "https://tastedive.com/api/similar?limit=4",
       jsonp: "callback",
       dataType: "jsonp",
       data: {
@@ -101,8 +104,28 @@ $(document).ready(function () {
         q: movie,
         k: "400900-Popcornp-N9NY6GRY",
       },
+
       success: function (response) {
-        console.log(response.Similar.Results[0]);
+
+        for (var i = 0; i < 4; i++) {
+          console.log(response.Similar.Results[i]);
+          var queryURL = "https://www.omdbapi.com/?t=" + response.Similar.Results[i].Name + "&apikey=trilogy";
+          console.log(response.Similar.Results[i].Name)
+          $.ajax({
+            url: queryURL,
+            method: "GET",
+          }).then(function (response) {
+            console.log(response.Poster);
+
+            var newImg = $("<img>");
+            newImg.addClass("thumbnail SuggestedFilmImg");
+            newImg.attr({ "src": response.Poster, "alt": response.Title, "data-tooltip": "", "tabindex": "2", "title":response.Title});
+            newImg.css({ 'width': '150px', 'height': '150px' })
+            $("#filmsTab").append(newImg);
+            
+        
+          });
+        }
       },
     });
   }
