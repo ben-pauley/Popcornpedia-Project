@@ -112,6 +112,7 @@ $(document).ready(function () {
       },
 
       success: function (response) {
+        $("#filmsTab").empty();
         for (var i = 0; i < 4; i++) {
           console.log(response.Similar.Results[i]);
           var queryURL =
@@ -150,6 +151,7 @@ $(document).ready(function () {
   }
 
   function renderCrewTab(omdbResponse) {
+    $("#crewTab").empty();
     var directorArray = omdbResponse.Director.split(",");
     $(".reveal-overlay").empty();
     for (var i = 0; i < directorArray.length; i++) {
