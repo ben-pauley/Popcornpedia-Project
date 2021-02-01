@@ -1,16 +1,20 @@
 $(document).ready(function () {
   renderRecentSearchBtns(retrieveRecentSearches());
+
   $(document).foundation();
+
   $("#add-movie").on("click", function (event) {
     event.preventDefault();
     var movie = storeRecentSearches(retrieveRecentSearches());
     renderRecentSearchBtns(retrieveRecentSearches());
     getMovieDetails(movie);
   });
+
   $(document).on("click", ".recent-search", getMovieClicked);
   function getMovieClicked() {
     getMovieDetails($(this).attr("movie-name"));
   }
+
   function storeRecentSearches(recentSearches) {
     var movie = $("#movie-input").val().trim();
     if (movie === "") {
@@ -23,6 +27,7 @@ $(document).ready(function () {
     localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
     return movie;
   }
+
   function retrieveRecentSearches() {
     var storedSearches = JSON.parse(localStorage.getItem("recentSearches"));
     if (storedSearches === null) {
@@ -30,6 +35,7 @@ $(document).ready(function () {
     }
     return storedSearches;
   }
+
   function renderRecentSearchBtns(recentSearches) {
     $("#recent-search-btns").empty();
     for (var i = 0; i < 3; i++) {
@@ -43,15 +49,14 @@ $(document).ready(function () {
       $("#recent-search-btns").prepend(newButton);
     }
   }
+
   function getMovieDetails(movie) {
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
     $.ajax({
       url: queryURL,
       method: "GET",
     }).then(function (response) {
-
       renderMainMovie(response);
-
 
       $("#actorsTab").empty();
       // Converting actor string into array
@@ -68,7 +73,7 @@ $(document).ready(function () {
       renderCrewTab(response);
     });
   }
-  
+
   function getCelebrityInfo(name, i) {
     var apiKey = "Wvx0+onLZFq2287mLWm4CA==38WLOWdjk3UqQ6FZ";
     var queryURL =
@@ -92,8 +97,9 @@ $(document).ready(function () {
         console.error("Error: ", jqXHR.responseText);
       },
     });
-  function getSimilarMovies(movie) {
+  }
 
+  function getSimilarMovies(movie) {
     $.ajax({
       type: "GET",
       url: "https://tastedive.com/api/similar?limit=4",
@@ -106,11 +112,13 @@ $(document).ready(function () {
       },
 
       success: function (response) {
-
         for (var i = 0; i < 4; i++) {
           console.log(response.Similar.Results[i]);
-          var queryURL = "https://www.omdbapi.com/?t=" + response.Similar.Results[i].Name + "&apikey=trilogy";
-          console.log(response.Similar.Results[i].Name)
+          var queryURL =
+            "https://www.omdbapi.com/?t=" +
+            response.Similar.Results[i].Name +
+            "&apikey=trilogy";
+          console.log(response.Similar.Results[i].Name);
           $.ajax({
             url: queryURL,
             method: "GET",
@@ -119,22 +127,28 @@ $(document).ready(function () {
 
             var newImg = $("<img>");
             newImg.addClass("thumbnail SuggestedFilmImg");
-            newImg.attr({ "src": response.Poster, "alt": response.Title, "data-tooltip": "", "tabindex": "2", "title":response.Title});
-            newImg.css({ 'width': '150px', 'height': '150px' })
+            newImg.attr({
+              src: response.Poster,
+              alt: response.Title,
+              "data-tooltip": "",
+              tabindex: "2",
+              title: response.Title,
+            });
+            newImg.css({ width: "150px", height: "150px" });
             $("#filmsTab").append(newImg);
-            
-        
           });
         }
       },
     });
   }
+
   function renderMainMovie(response) {
     $("#body-container").css("display", "block");
     $("#main-film-poster").attr("src", response.Poster);
     $("#main-film-name").text(response.Title + " (" + response.Year + ")");
     $("#main-film-synopsis").text(response.Plot);
   }
+
   function renderCrewTab(omdbResponse) {
     var directorArray = omdbResponse.Director.split(",");
     $(".reveal-overlay").empty();
@@ -144,6 +158,7 @@ $(document).ready(function () {
       getDirectorInfo(directorName, i);
     }
   }
+
   function getDirectorInfo(name, i) {
     var apiKey = "Wvx0+onLZFq2287mLWm4CA==38WLOWdjk3UqQ6FZ";
     var queryURL =
@@ -154,12 +169,11 @@ $(document).ready(function () {
       headers: { "X-Api-Key": apiKey },
       contentType: "application/json",
       success: function (response) {
-        // Creating variables that hold specific responses from the API
         var age = response[0].age;
         var birthday = response[0].birthday;
         var nationality = response[0].nationality;
         var occupation = response[0].occupation;
-        // Calling function that holds actors Modals
+
         directorModals(name, age, birthday, nationality, occupation, i);
         $(document).foundation();
       },
@@ -168,7 +182,7 @@ $(document).ready(function () {
       },
     });
   }
-  // get Actors images
+
   function getActorImg(name, i) {
     var imdbIdUrl = {
       async: true,
@@ -200,6 +214,7 @@ $(document).ready(function () {
       $(document).foundation();
     });
   }
+
   function actorsModals(name, age, birthday, nationality, occupation, i) {
     // Creating modals when actors images are clicked
     modalDiv = $("<div>");
@@ -227,6 +242,7 @@ $(document).ready(function () {
         occupation
     );
   }
+
   function directorModals(name, age, birthday, nationality, occupation, i) {
     modalDiv = $("<div>");
     modalDiv.addClass("small reveal");
@@ -253,6 +269,7 @@ $(document).ready(function () {
         occupation
     );
   }
+
   function getDirectorImg(name, i) {
     var imdbIdUrl = {
       async: true,

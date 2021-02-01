@@ -1,82 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Compressed CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
+      crossorigin="anonymous"
+    />
 
-  <!-- Compressed CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css" />
 
-  <link rel="stylesheet" href="styles/style.css" />
+    <title>Popcornpedia</title>
+  </head>
 
-
-  <title>Popcornpedia</title>
-</head>
-
-<body>
-  <div class="callout medium secondary">
-    <div class="row columns text-center">
-      <form>
-        <div>
-          <label class="text-left">
-            <h1>Search for a movie</h1>
-          </label>
-          <input type="text" placeholder="(Ex. Wonder Woman, Pulp Fiction, Frozen, etc.)" id="movie-input" />
-        </div>
-        <div class="text-right">
-          <input type="submit" value="Search" class="button alert" id="add-movie" />
-        </div>
-      </form>
-      <div class="row columns small-4 stacked button-group" id="recent-search-btns"></div>
-    </div>
-  </div>
-
-  <div class="row columns medium-10" id="body-container" style="display: none">
-    <div class="media-object" id="movie-info">
-      <div class="media-object-section">
-        <img id="main-film-poster" />
+  <body>
+    <div class="callout medium secondary">
+      <div class="row columns text-center">
+        <form>
+          <div>
+            <label class="text-left">
+              <h1>Search for a movie</h1>
+            </label>
+            <input
+              type="text"
+              placeholder="(Ex. Wonder Woman, Pulp Fiction, Frozen, etc.)"
+              id="movie-input"
+            />
+          </div>
+          <div class="text-right">
+            <input
+              type="submit"
+              value="Search"
+              class="button alert"
+              id="add-movie"
+            />
+          </div>
+        </form>
+        <div
+          class="row columns small-4 stacked button-group"
+          id="recent-search-btns"
+        ></div>
       </div>
-      <div class="media-object-section">
-        <h3 id="main-film-name"></h3>
-        <p id="main-film-synopsis"></p>
-      </div>
     </div>
 
-    <ul class="tabs" data-active-collapse="true" data-tabs id="main-content">
-      <li class="tabs-title is-active"><a href="#actorsTab" aria-selected="true">Actors</a></li>
-      <li class="tabs-title"><a href="#crewTab">Crew</a></li>
-      <li class="tabs-title"><a href="#filmsTab">Films you may like</a></li>
-    </ul>
+    <div
+      class="row columns medium-10"
+      id="body-container"
+      style="display: none"
+    >
+      <div class="media-object" id="movie-info">
+        <div class="media-object-section">
+          <img id="main-film-poster" />
+        </div>
+        <div class="media-object-section">
+          <h3 id="main-film-name"></h3>
+          <p id="main-film-synopsis"></p>
+        </div>
+      </div>
 
-    <div class="tabs-content" data-tabs-content="main-content">
-      <div class="tabs-panel is-active" id="actorsTab">
+      <ul class="tabs" data-active-collapse="true" data-tabs id="main-content">
+        <li class="tabs-title is-active">
+          <a href="#actorsTab" aria-selected="true">Actors</a>
+        </li>
+        <li class="tabs-title"><a href="#crewTab">Crew</a></li>
+        <li class="tabs-title"><a href="#filmsTab">Films you may like</a></li>
+      </ul>
 
-        <!-- <div class="reveal" id="actorInfo" data-reveal>
+      <div class="tabs-content" data-tabs-content="main-content">
+        <div class="tabs-panel is-active" id="actorsTab">
+          <!-- <div class="reveal" id="actorInfo" data-reveal>
           <h1 id="actorName"></h1>
           <button class="close-button" data-close aria-label="Close modal" type="button">
             <span aria-hidden="true">&times;</span>
           </button>
         </div> -->
-
-      </div>
-      <div class="tabs-panel" id="crewTab">
-        crew
-      </div>
-      <div class="tabs-panel" id="filmsTab">
-      
+        </div>
+        <div class="tabs-panel" id="crewTab">crew</div>
+        <div class="tabs-panel" id="filmsTab"></div>
       </div>
     </div>
-  </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-  <!-- Compressed JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="scripts/script.js"> </script>
-</body>
-
+    <!-- Compressed JavaScript -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="scripts/script.js"></script>
+  </body>
 </html>
