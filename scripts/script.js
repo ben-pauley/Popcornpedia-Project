@@ -12,7 +12,7 @@ $(document).ready(function () {
 
   $(document).on("click", ".recent-search", getMovieClicked);
   function getMovieClicked() {
-    getMovieDetails($(this).attr("movie-name"));
+    getMovieDetails($(this).attr("alt"));
   }
 
   function storeRecentSearches(recentSearches) {
@@ -42,16 +42,26 @@ $(document).ready(function () {
       if (recentSearches[i] === undefined) {
         return;
       }
-      var newButton = $("<button>");
-      newButton.addClass("button secondary recent-search");
-      newButton.attr("movie-name", recentSearches[i]);
-      newButton.text(recentSearches[i]);
-      $("#recent-search-btns").prepend(newButton);
+      var queryURL =
+        "https://www.omdbapi.com/?t=" + recentSearches[i] + "&apikey=trilogy";
+    
+      $.ajax({
+        url: queryURL,
+        method: "GET",
+      }).then(function (response) {
+        console.log(response.Poster);
+
+        var newImg = $("<img>");
+        newImg.addClass("thumbnail recent-search");
+        newImg.attr({src: response.Poster,alt: response.Title});
+        $("#recent-search-btns").append(newImg);
+      });
+
     }
   }
 
   function getMovieDetails(movie) {
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&plot=full&apikey=trilogy";
     $.ajax({
       url: queryURL,
       method: "GET",
@@ -230,16 +240,16 @@ $(document).ready(function () {
     $("#actorName").text(name);
     $("#actorInfo").html(
       "<b>Age: </b>" +
-        age +
-        "<br>" +
-        "<b>Birthday : <b/>" +
-        birthday +
-        "<br>" +
-        "<b>Nationality : </b>" +
-        nationality +
-        "<br>" +
-        "<b>Occupation : </b>" +
-        occupation
+      age +
+      "<br>" +
+      "<b>Birthday : <b/>" +
+      birthday +
+      "<br>" +
+      "<b>Nationality : </b>" +
+      nationality +
+      "<br>" +
+      "<b>Occupation : </b>" +
+      occupation
     );
   }
 
@@ -257,16 +267,16 @@ $(document).ready(function () {
     $("#directorName").text(name);
     $("#directorInfo").html(
       "<b>Age: </b>" +
-        age +
-        "<br>" +
-        "<b>Birthday : <b/>" +
-        birthday +
-        "<br>" +
-        "<b>Nationality : </b>" +
-        nationality +
-        "<br>" +
-        "<b>Occupation : </b>" +
-        occupation
+      age +
+      "<br>" +
+      "<b>Birthday : <b/>" +
+      birthday +
+      "<br>" +
+      "<b>Nationality : </b>" +
+      nationality +
+      "<br>" +
+      "<b>Occupation : </b>" +
+      occupation
     );
   }
 
