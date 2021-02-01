@@ -56,10 +56,10 @@ $(document).ready(function () {
     $.ajax({
       url: queryURL,
       method: "GET",
-    }).then(function (response) {
-      renderMainMovie(response);
-      renderActorsTab(response);
-      renderCrewTab(response);
+    }).then(function (omdbResponse) {
+      renderMainMovie(omdbResponse);
+      renderActorsTab(omdbResponse);
+      renderCrewTab(omdbResponse);
       renderSimilarMoviesTab(movie);
     });
   }
@@ -96,6 +96,24 @@ $(document).ready(function () {
       getPersonImg(directorName, i, "#crewTab");
       fetchDirectorInfo(directorName, i);
     }
+  }
+
+  function renderSimilarMoviesTab(movie) {
+    $.ajax({
+      type: "GET",
+      url: "https://tastedive.com/api/similar?limit=4",
+      jsonp: "callback",
+      dataType: "jsonp",
+      data: {
+        type: "movie",
+        q: movie,
+        k: "400900-Popcornp-N9NY6GRY",
+      },
+
+      success: function (tasteDiveResponse) {
+        fetchPosters(tasteDiveResponse);
+      },
+    });
   }
 
   function getPersonImg(name, i, tabID) {
@@ -235,24 +253,6 @@ $(document).ready(function () {
         "<b>Occupation : </b>" +
         occupation
     );
-  }
-
-  function renderSimilarMoviesTab(movie) {
-    $.ajax({
-      type: "GET",
-      url: "https://tastedive.com/api/similar?limit=4",
-      jsonp: "callback",
-      dataType: "jsonp",
-      data: {
-        type: "movie",
-        q: movie,
-        k: "400900-Popcornp-N9NY6GRY",
-      },
-
-      success: function (tasteDiveResponse) {
-        fetchPosters(tasteDiveResponse);
-      },
-    });
   }
 
   function fetchPosters(tasteDiveResponse) {
