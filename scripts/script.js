@@ -44,17 +44,22 @@ $(document).ready(function () {
       }
       var queryURL =
         "https://www.omdbapi.com/?t=" + recentSearches[i] + "&apikey=trilogy";
-    
+
       $.ajax({
         url: queryURL,
         method: "GET",
       }).then(function (response) {
-        console.log(response.Poster);
 
         var newImg = $("<img>");
+        var newDiv = $("<div>");
+        newDiv.addClass("columns medium-4 float-left");
+        newDiv.css("width", "33%");
         newImg.addClass("thumbnail recent-search");
-        newImg.attr({src: response.Poster,alt: response.Title});
-        $("#recent-search-btns").append(newImg);
+        newImg.attr({ src: response.Poster, alt: response.Title });
+        newImg.css({ width: "300px", height: "450px" });
+        $("#recent-search-btns").append(newDiv);
+        newDiv.append(newImg);
+
       });
 
     }
