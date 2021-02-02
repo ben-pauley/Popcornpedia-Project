@@ -56,10 +56,10 @@ $(document).ready(function () {
     $.ajax({
       url: queryURL,
       method: "GET",
-    }).then(function (omdbResponse) {
-      renderMainMovie(omdbResponse);
-      renderActorsTab(omdbResponse);
-      renderCrewTab(omdbResponse);
+    }).then(function (response) {
+      renderMainMovie(response);
+      renderActorsTab(response);
+      renderCrewTab(response);
       renderSimilarMoviesTab(movie);
     });
   }
@@ -71,52 +71,21 @@ $(document).ready(function () {
     $("#main-film-synopsis").text(response.Plot);
   }
 
-  function renderActorsTab(omdbResponse) {
+  function renderActorsTab(response) {
     $("#actorsTab").empty();
     // Remove modals content
     $(".reveal-overlay").empty();
     // Converting actor string into array
-    var actorArray = omdbResponse.Actors.split(",");
+    var actorArray = response.Actors.split(",");
     // For loop that create actors images and their related infomation
     for (var i = 0; i < actorArray.length; i++) {
       var actorName = actorArray[i].trim();
-      getPersonImg(actorName, i, "#actorsTab");
+      fetchActorImg(actorName, i);
       fetchActorInfo(actorName, i);
     }
   }
 
-  function renderCrewTab(omdbResponse) {
-    $("#crewTab").empty();
-    $(".reveal-overlay").empty();
-
-    var directorArray = omdbResponse.Director.split(",");
-
-    for (var i = 0; i < directorArray.length; i++) {
-      var directorName = directorArray[i].trim();
-      getPersonImg(directorName, i, "#crewTab");
-      fetchDirectorInfo(directorName, i);
-    }
-  }
-
-  function renderSimilarMoviesTab(movie) {
-    $.ajax({
-      type: "GET",
-      url: "https://tastedive.com/api/similar?limit=4",
-      jsonp: "callback",
-      dataType: "jsonp",
-      data: {
-        type: "movie",
-        q: movie,
-        k: "400900-Popcornp-N9NY6GRY",
-      },
-
-      success: function (tasteDiveResponse) {
-        fetchPosters(tasteDiveResponse);
-      },
-    });
-  }
-
-  function getPersonImg(name, i, tabID) {
+  function fetchActorImg(name, i) {
     var imdbIdUrl = {
       async: true,
       crossDomain: true,
@@ -131,28 +100,33 @@ $(document).ready(function () {
       },
     };
     $.ajax(imdbIdUrl).done(function (imdbResponse) {
-      var newImg = $("<img>");
-
-      newImg.addClass("thumbnail");
-      newImg.css({ width: "150px", height: "150px" });
-
-      newImg.attr({
-        id: "personImg" + i,
-        src: imdbResponse.names[0].image,
-        alt: imdbResponse.names[0].title,
-        "data-tooltip": "",
-        tabindex: "2",
-        title: imdbResponse.names[0].title,
-      });
-
-      $(tabID).append(newImg);
+      setActorImg(imdbResponse, i);
 
       $(document).foundation();
     });
   }
 
+  function setActorImg(imdbResponse, i) {
+    var newImg = $("<img>");
+
+    newImg.addClass("thumbnail");
+    newImg.css({ width: "150px", height: "150px" });
+    newImg.attr({
+      id: "actorImg" + i,
+      src: imdbResponse.names[0].image,
+      alt: imdbResponse.names[0].title,
+      "data-tooltip": "",
+      tabindex: "2",
+      title: imdbResponse.names[0].title,
+    });
+
+    $("#actorsTab").append(newImg);
+
+    $(document).foundation();
+  }
+
   function fetchActorInfo(name, i) {
-    var apiKey = "Wvx0+onLZFq2287mLWm4CA==38WLOWdjk3UqQ6FZ";
+    var apiKey = "OXs37W7S5QcenGqKB1COIMhZ7KybW7p6exHAYP7H";
     var queryURL =
       "https://api.celebrityninjas.com/v1/search?limit=1&name=" + name;
     $.ajax({
@@ -161,42 +135,22 @@ $(document).ready(function () {
       headers: { "X-Api-Key": apiKey },
       contentType: "application/json",
       success: function (celebNinjasResponse) {
-        actorsModals(celebNinjasResponse, i);
+        actorsModals(celebNinjasResponse, name, i);
 
         $(document).foundation();
       },
       error: function ajaxError(jqXHR) {
-        console.error("Error: ", jqXHR.responseText);
+        console.error("Error: ", jqXHR.celebNinjasResponseText);
       },
     });
   }
 
-  function fetchDirectorInfo(name, i) {
-    var apiKey = "Wvx0+onLZFq2287mLWm4CA==38WLOWdjk3UqQ6FZ";
-    var queryURL =
-      "https://api.celebrityninjas.com/v1/search?limit=1&name=" + name;
-    $.ajax({
-      method: "GET",
-      url: queryURL,
-      headers: { "X-Api-Key": apiKey },
-      contentType: "application/json",
-      success: function (celebNinjasResponse) {
-        directorModals(celebNinjasResponse, i);
-
-        $(document).foundation();
-      },
-      error: function ajaxError(jqXHR) {
-        console.error("Error: ", jqXHR.responseText);
-      },
-    });
-  }
-
-  function actorsModals(celebNinjasResponse, i) {
+  function actorsModals(celebNinjasResponse, name, i) {
     var age = celebNinjasResponse[0].age;
     var birthday = celebNinjasResponse[0].birthday;
     var nationality = celebNinjasResponse[0].nationality;
     var occupation = celebNinjasResponse[0].occupation;
-
+    // Creating modals when actors images are clicked
     modalDiv = $("<div>");
     modalDiv.addClass("small reveal");
     modalDiv.attr({ "data-reveal": "", id: "actorInfo0" + i });
@@ -223,7 +177,80 @@ $(document).ready(function () {
     );
   }
 
-  function directorModals(celebNinjasResponse, i) {
+  function renderCrewTab(omdbResponse) {
+    $("#crewTab").empty();
+    $(".reveal-overlay").empty();
+
+    var directorArray = omdbResponse.Director.split(",");
+
+    for (var i = 0; i < directorArray.length; i++) {
+      var directorName = directorArray[i].trim();
+      fetchDirectorImg(directorName, i);
+      fetchDirectorInfo(directorName, i);
+    }
+  }
+
+  function fetchDirectorImg(name, i) {
+    var imdbIdUrl = {
+      async: true,
+      crossDomain: true,
+      url:
+        "https://imdb-internet-movie-database-unofficial.p.rapidapi.com/search/" +
+        name,
+      method: "GET",
+      headers: {
+        "x-rapidapi-key": "f1b3cbe9c3msh648456feaa198ebp1d2da3jsnc55cec980b8a",
+        "x-rapidapi-host":
+          "imdb-internet-movie-database-unofficial.p.rapidapi.com",
+      },
+    };
+    $.ajax(imdbIdUrl).done(function (imdbResponse) {
+      setDirectorImg(imdbResponse, i);
+
+      $(document).foundation();
+    });
+  }
+
+  function setDirectorImg(imdbResponse, i) {
+    var newImg = $("<img>");
+
+    newImg.addClass("thumbnail");
+    newImg.css({ width: "150px", height: "150px" });
+    newImg.attr({
+      id: "directorImg" + i,
+      src: imdbResponse.names[0].image,
+      alt: imdbResponse.names[0].title,
+      "data-tooltip": "",
+      tabindex: "2",
+      title: imdbResponse.names[0].title,
+    });
+
+    $("#crewTab").append(newImg);
+
+    $(document).foundation();
+  }
+
+  function fetchDirectorInfo(name, i) {
+    var apiKey = "OXs37W7S5QcenGqKB1COIMhZ7KybW7p6exHAYP7H";
+    var queryURL =
+      "https://api.celebrityninjas.com/v1/search?limit=1&name=" + name;
+    $.ajax({
+      method: "GET",
+      url: queryURL,
+      headers: { "X-Api-Key": apiKey },
+      contentType: "application/json",
+      success: function (celebNinjasResponse) {
+        directorModals(celebNinjasResponse, name, i);
+
+        $(document).foundation();
+      },
+      error: function ajaxError(jqXHR) {
+        console.error("Error: ", jqXHR.responseText);
+      },
+    });
+  }
+
+  function directorModals(celebNinjasResponse, name, i) {
     var age = celebNinjasResponse[0].age;
     var birthday = celebNinjasResponse[0].birthday;
     var nationality = celebNinjasResponse[0].nationality;
@@ -255,6 +282,24 @@ $(document).ready(function () {
     );
   }
 
+  function renderSimilarMoviesTab(movie) {
+    $.ajax({
+      type: "GET",
+      url: "https://tastedive.com/api/similar?limit=4",
+      jsonp: "callback",
+      dataType: "jsonp",
+      data: {
+        type: "movie",
+        q: movie,
+        k: "400900-Popcornp-N9NY6GRY",
+      },
+
+      success: function (tasteDiveResponse) {
+        fetchPosters(tasteDiveResponse);
+      },
+    });
+  }
+
   function fetchPosters(tasteDiveResponse) {
     $("#filmsTab").empty();
 
@@ -267,13 +312,14 @@ $(document).ready(function () {
         url: queryURL,
         method: "GET",
       }).then(function (omdbResponse) {
-        displaySimilarMoviePosters(omdbResponse);
+        displayPosters(omdbResponse);
       });
     }
   }
 
-  function displaySimilarMoviePosters(omdbResponse) {
+  function displayPosters(omdbResponse) {
     var newImg = $("<img>");
+
     newImg.addClass("thumbnail SuggestedFilmImg");
     newImg.css({ width: "150px", height: "150px" });
     newImg.attr({
@@ -283,6 +329,7 @@ $(document).ready(function () {
       tabindex: "2",
       title: omdbResponse.Title,
     });
+
     $("#filmsTab").append(newImg);
   }
 });
