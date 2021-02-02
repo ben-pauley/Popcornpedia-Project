@@ -52,11 +52,11 @@ $(document).ready(function () {
 
         var newImg = $("<img>");
         var newDiv = $("<div>");
-        newDiv.addClass("columns medium-4 float-left");
-        newDiv.css("width", "33%");
+        newDiv.addClass("column is-flex is-horizontal-center ");
+        // newDiv.css("width", "33%");
         newImg.addClass("thumbnail recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
-        newImg.css({ width: "300px", height: "450px" });
+         newImg.css({ width: "300px", height: "450px" });
         $("#recent-search-btns").append(newDiv);
         newDiv.append(newImg);
 
@@ -316,3 +316,17 @@ $(document).ready(function () {
     });
   }
 });
+
+function openTab(evt, tabName) {
+  var i, x, tablinks;
+  x = $(".content-tab");
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+  }
+  tablinks = $(".tab");
+  for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" is-active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " is-active";
+};
