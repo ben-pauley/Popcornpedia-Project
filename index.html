@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Compressed CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" />
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" /> -->
   <!-- Bulma CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
   <link rel="stylesheet" href="styles/style.css" />
@@ -19,87 +19,96 @@
 
 <body>
   <header>
-    
+
     <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
-      
-        <div class="navbar-start">
-          <img src="assets/logo.png" alt="" style="max-width:8%">
-          <h2 class="title is-2 ml-3" style="line-height:2; color:white">Popcornpedia</h2> 
-        </div>
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="field has-addons">
-              <div class="control">
-                <input id="movie-input" type="search" placeholder="Search for a movie" class="input is-rounded">
-              </div>
-              <div class="control">
-                <button id="add-movie" type="submit" value="Search" class="button is-info is-rounded is-focused">
-                  Search
-                </button>
-              </div>
+
+      <div class="navbar-start">
+        <img src="assets/logo.png" alt="" style="max-width:8%">
+        <h2 class="title is-2 ml-3" style="line-height:2; color:white">Popcornpedia</h2>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field has-addons">
+            <div class="control">
+              <input id="movie-input" type="search" placeholder="Search for a movie" class="input is-rounded">
+            </div>
+            <div class="control">
+              <button id="add-movie" type="submit" value="Search" class="button is-info is-rounded is-focused">
+                Search
+              </button>
             </div>
           </div>
         </div>
+      </div>
     </nav>
 
     </div>
   </header>
 
   </form>
-  <div class="columns mt-6" id="recent-search-btns">
+  <div class="columns is-mobile is-centered m-5" id="recent-search-btns">
 
   </div>
 
-
-  <div class="row columns medium-10" id="body-container" style="display: none">
-    <div class="media-object" id="movie-info">
-      <div class="media-object-section">
-        <img id="main-film-poster" />
-      </div>
-      <div class="media-object-section">
-        <h3 id="main-film-name"></h3>
-        <p id="main-film-synopsis"></p>
-      </div>
-    </div>
-
-    <nav class="tabs is-boxed is-centered is-fullwidth is-medium">
-      <ul>
-        <li class="tab is-active" onclick="openTab(event,'actorsTab')">
-          <a>
-            <span class="icon is-small"><i class="fas fa-user-circle" aria-hidden="true"></i></span>
-            <span>Actors</span>
-          </a>
-        </li>
-        <li class="tab" onclick="openTab(event,'crewTab')">
-          <a>
-            <span class="icon is-small"><i class="fas fa-glasses" aria-hidden="true"></i></span>
-            <span>Crew</span>
-          </a>
-        </li>
-        <li class="tab" onclick="openTab(event,'filmsTab')">
-          <a>
-            <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
-            <span>Films you may like</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="container section is-horizontal-center">
-      <div id="actorsTab" class="columns is-mobile is-centered content-tab">
-      </div>
-      <div id="crewTab" class="columns is-mobile is-centered content-tab" style="display:none">
-      </div>
-      <div id="filmsTab" class="columns is-mobile is-centered content-tab" style="display:none">
+    <div id="body-container" class="container" style="display: none">
+      <div class="section">
+        <div class="card is-horizontal columns">
+         
+          <div class="card-image column is-flex is-justify-content-center">
+            <header class="card-header">
+              <h3 id="main-film-name" class="card-header-title title is-3"></h3>
+          </header>
+              <img id="main-film-poster">
+            
+          </div>
+          <div class="card-content column is-flex-grow-5">
+           <p id="main-film-synopsis"></p>
+            </div>
+        </div>
       </div>
     </div>
+ 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Compressed JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="scripts/script.js"></script>
+
+  <nav class="tabs is-boxed is-centered is-fullwidth is-medium" style="display:none" >
+    <ul>
+      <li class="tab is-active" onclick="openTab(event,'actorsTab')">
+        <a>
+          <span class="icon is-small"><i class="fas fa-user-circle" aria-hidden="true"></i></span>
+          <span>Actors</span>
+        </a>
+      </li>
+      <li class="tab" onclick="openTab(event,'crewTab')">
+        <a>
+          <span class="icon is-small"><i class="fas fa-glasses" aria-hidden="true"></i></span>
+          <span>Crew</span>
+        </a>
+      </li>
+      <li class="tab" onclick="openTab(event,'filmsTab')">
+        <a>
+          <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+          <span>Films you may like</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container section is-horizontal-center">
+    <div id="actorsTab" class="columns is-mobile is-centered content-tab">
+    </div>
+    <div id="crewTab" class="columns is-mobile is-centered content-tab" style="display:none">
+    </div>
+    <div id="filmsTab" class="columns is-mobile is-centered content-tab" style="display:none">
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Compressed JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="scripts/script.js"></script>
 </body>
 
 </html>

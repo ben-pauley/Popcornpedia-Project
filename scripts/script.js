@@ -52,8 +52,8 @@ $(document).ready(function () {
 
         var newImg = $("<img>");
         var newDiv = $("<div>");
-        newDiv.addClass("column is-flex is-horizontal-center");
-        newImg.addClass("thumbnail recent-search");
+        newDiv.addClass("column is-flex is-justify-content-center");
+        newImg.addClass("recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
          newImg.css({ width: "300px", height: "450px" });
         $("#recent-search-btns").append(newDiv);
@@ -65,6 +65,7 @@ $(document).ready(function () {
   }
 
   function getMovieDetails(movie) {
+    $(".tabs").css("display","");
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&plot=full&apikey=trilogy";
     $.ajax({
       url: queryURL,
@@ -140,7 +141,7 @@ $(document).ready(function () {
             console.log(response.Poster);
 
             var newImg = $("<img>");
-            newImg.addClass("thumbnail SuggestedFilmImg m-5");
+            newImg.addClass("SuggestedFilmImg m-5");
             newImg.attr({
               src: response.Poster,
               alt: response.Title,
@@ -157,7 +158,7 @@ $(document).ready(function () {
   }
 
   function renderMainMovie(response) {
-    $("#body-container").css("display", "block");
+    $("#body-container").css("display", "");
     $("#main-film-poster").attr("src", response.Poster);
     $("#main-film-name").text(response.Title + " (" + response.Year + ")");
     $("#main-film-synopsis").text(response.Plot);
@@ -214,7 +215,7 @@ $(document).ready(function () {
     $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
       // Creating images for each actor name
       var newImg = $("<img>");
-      newImg.addClass("thumbnail m-5");
+      newImg.addClass("m-5");
       newImg.attr({
         id: "actorImg" + i,
         src: imdbIdresponse.names[0].image,
@@ -300,7 +301,7 @@ $(document).ready(function () {
     };
     $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
       var newImg = $("<img>");
-      newImg.addClass("thumbnail m-5");
+      newImg.addClass("m-5");
       newImg.attr({
         id: "directorImg" + i,
         src: imdbIdresponse.names[0].image,
