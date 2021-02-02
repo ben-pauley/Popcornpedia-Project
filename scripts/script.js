@@ -52,8 +52,7 @@ $(document).ready(function () {
 
         var newImg = $("<img>");
         var newDiv = $("<div>");
-        newDiv.addClass("column is-flex is-horizontal-center ");
-        // newDiv.css("width", "33%");
+        newDiv.addClass("column is-flex is-horizontal-center");
         newImg.addClass("thumbnail recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
          newImg.css({ width: "300px", height: "450px" });
@@ -141,7 +140,7 @@ $(document).ready(function () {
             console.log(response.Poster);
 
             var newImg = $("<img>");
-            newImg.addClass("thumbnail SuggestedFilmImg");
+            newImg.addClass("thumbnail SuggestedFilmImg m-5");
             newImg.attr({
               src: response.Poster,
               alt: response.Title,
@@ -149,7 +148,7 @@ $(document).ready(function () {
               tabindex: "2",
               title: response.Title,
             });
-            newImg.css({ width: "150px", height: "150px" });
+            newImg.css({ width: "220px", height: "350px" });
             $("#filmsTab").append(newImg);
           });
         }
@@ -215,7 +214,7 @@ $(document).ready(function () {
     $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
       // Creating images for each actor name
       var newImg = $("<img>");
-      newImg.addClass("thumbnail");
+      newImg.addClass("thumbnail m-5");
       newImg.attr({
         id: "actorImg" + i,
         src: imdbIdresponse.names[0].image,
@@ -301,7 +300,7 @@ $(document).ready(function () {
     };
     $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
       var newImg = $("<img>");
-      newImg.addClass("thumbnail");
+      newImg.addClass("thumbnail m-5");
       newImg.attr({
         id: "directorImg" + i,
         src: imdbIdresponse.names[0].image,
@@ -321,12 +320,13 @@ function openTab(evt, tabName) {
   var i, x, tablinks;
   x = $(".content-tab");
   for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
+      x[i].style.display ="none ";
   }
   tablinks = $(".tab");
   for (i = 0; i < x.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" is-active", "");
+      tablinks[i].className = tablinks[i].className.replace("is-active", "");
   }
-  document.getElementById(tabName).style.display = "block";
+  document.getElementById(tabName).style= "";
   evt.currentTarget.className += " is-active";
+  
 };
