@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-navbar-fixed-top">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,37 +8,52 @@
   <!-- Compressed CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
     integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" />
-
+  <!-- Bulma CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
   <link rel="stylesheet" href="styles/style.css" />
-
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
   <title>Popcornpedia</title>
 </head>
 
 <body>
   <header>
-    <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
-      <button class="menu-icon" type="button" data-toggle="example-menu"></button>
-      <div class="title-bar-title">Menu</div>
-    </div>
+    
+    <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        
+          <img src="assets/logo.png" alt="" width="75" height="60">
+       
+      </div>
 
-    <div class="top-bar" id="navbar">
-      <div class="top-bar-left">
-        <ul class="dropdown menu" data-dropdown-menu>
-          <li> <img src="assets/logo.png" alt="" width="60" height="60"></li>
-          <li class="menu-text">Popcornpedia</li>
-        </ul>
-      </div>
-      <div class="top-bar-right">
-        <ul class="menu">
-          <li><input id="movie-input" type="search" placeholder="Search for a movie"></li>
-          <li><button id="add-movie" type="submit" value="Search" class="button">Search</button></li>
-        </ul>
-      </div>
+      <div  class="navbar-menu">
+        <div class="navbar-start">
+          <h2 class="title is-2 ml-3 is-white" style="line-height:2; color:white">Popcornpedia</h2> 
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field has-addons">
+              <div class="control">
+                <input id="movie-input" type="search" placeholder="Search for a movie" class="input is-rounded">
+              </div>
+              <div class="control">
+                <button id="add-movie" type="submit" value="Search" class="button is-info is-rounded is-focused">
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </nav>
+
     </div>
   </header>
-  
+
   </form>
-  <div class="row float-center" id="recent-search-btns"></div>
+  <div class="columns mt-6" id="recent-search-btns">
+
+  </div>
 
 
   <div class="row columns medium-10" id="body-container" style="display: none">
@@ -52,34 +67,44 @@
       </div>
     </div>
 
-    <ul class="tabs" data-active-collapse="true" data-tabs id="main-content">
-      <li class="tabs-title is-active">
-        <a href="#actorsTab" aria-selected="true">Actors</a>
-      </li>
-      <li class="tabs-title"><a href="#crewTab">Crew</a></li>
-      <li class="tabs-title"><a href="#filmsTab">Films you may like</a></li>
-    </ul>
+    <nav class="tabs is-boxed is-centered is-fullwidth is-medium">
+      <ul>
+        <li class="tab is-active" onclick="openTab(event,'actorsTab')">
+          <a>
+            <span class="icon is-small"><i class="fas fa-user-circle" aria-hidden="true"></i></span>
+            <span>Actors</span>
+          </a>
+        </li>
+        <li class="tab" onclick="openTab(event,'crewTab')">
+          <a>
+            <span class="icon is-small"><i class="fas fa-glasses" aria-hidden="true"></i></span>
+            <span>Crew</span>
+          </a>
+        </li>
+        <li class="tab" onclick="openTab(event,'filmsTab')">
+          <a>
+            <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+            <span>Films you may like</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-    <div class="tabs-content" data-tabs-content="main-content">
-      <div class="tabs-panel is-active" id="actorsTab">
-        <!-- <div class="reveal" id="actorInfo" data-reveal>
-          <h1 id="actorName"></h1>
-          <button class="close-button" data-close aria-label="Close modal" type="button">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div> -->
+    <div class="container section">
+      <div id="actorsTab" class="content-tab">
       </div>
-      <div class="tabs-panel" id="crewTab"></div>
-      <div class="tabs-panel" id="filmsTab"></div>
+      <div id="crewTab" class="content-tab" style="display:none">
+      </div>
+      <div id="filmsTab" class="content-tab" style="display:none">
+      </div>
     </div>
-  </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <!-- Compressed JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="scripts/script.js"></script>
+    <!-- Compressed JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/script.js"></script>
 </body>
 
 </html>
