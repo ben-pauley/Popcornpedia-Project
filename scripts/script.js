@@ -128,8 +128,8 @@ $(document).ready(function () {
   function setActorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail");
-    newImg.css({ width: "150px", height: "150px" });
+    newImg.addClass("thumbnail m-5");
+    newImg.css({ width: "200px", height: "200px" });
     newImg.attr({
       id: "actorImg" + i,
       src: imdbResponse.names[0].image,
@@ -235,8 +235,8 @@ $(document).ready(function () {
   function setDirectorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail");
-    newImg.css({ width: "150px", height: "150px" });
+    newImg.addClass("thumbnail m-5");
+    newImg.css({ width: "200px", height: "200px" });
     newImg.attr({
       id: "directorImg" + i,
       src: imdbResponse.names[0].image,
@@ -341,8 +341,8 @@ $(document).ready(function () {
   function displayPosters(omdbResponse) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail SuggestedFilmImg");
-    newImg.css({ width: "150px", height: "150px" });
+    newImg.addClass("thumbnail SuggestedFilmImg m-5");
+    newImg.css({ width: "300px", height: "400px" });
     newImg.attr({
       src: omdbResponse.Poster,
       alt: omdbResponse.Title,
