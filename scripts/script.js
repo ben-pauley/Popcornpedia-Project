@@ -55,7 +55,7 @@ $(document).ready(function () {
         newDiv.addClass("column is-flex is-justify-content-center");
         newImg.addClass("thumbnail recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
-         newImg.css({ width: "300px", height: "450px" });
+        newImg.css({ width: "300px", height: "450px" });
         $("#recent-search-btns").append(newDiv);
         newDiv.append(newImg);
 
@@ -65,9 +65,9 @@ $(document).ready(function () {
   }
 
   function getMovieDetails(movie) {
-    $(".tabs").css("display","");
-    $("#tabsContent").css("display","");
-    $("#recent-search-btns").css("display","");
+    $(".tabs").css("display", "");
+    $("#tabsContent").css("display", "");
+    $("#recent-search-btns").css("display", "");
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&plot=full&apikey=trilogy";
     $.ajax({
       url: queryURL,
@@ -130,13 +130,13 @@ $(document).ready(function () {
       },
 
       success: function (response) {
-       
+
         for (var i = 0; i < 4; i++) {
-           var queryURL =
+          var queryURL =
             "https://www.omdbapi.com/?t=" +
             response.Similar.Results[i].Name +
             "&apikey=trilogy";
-          
+
           $.ajax({
             url: queryURL,
             method: "GET",
@@ -150,6 +150,7 @@ $(document).ready(function () {
               "data-tooltip": "",
               tabindex: "2",
               title: response.Title,
+              id: response.Title
             });
             newImg.css({ width: "300px", height: "400px" });
             $("#filmsTab").append(newImg);
@@ -259,7 +260,7 @@ $(document).ready(function () {
       "<b>Occupation : </b>" +
       occupation
     );
-    
+
   }
 
   function directorModals(name, age, birthday, nationality, occupation, i) {
@@ -325,14 +326,14 @@ function openTab(evt, tabName) {
   var i, x, tablinks;
   x = $(".content-tab");
   for (i = 0; i < x.length; i++) {
-      x[i].style.display ="none ";
+    x[i].style.display = "none ";
   }
   tablinks = $(".tab");
   for (i = 0; i < x.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace("is-active", "");
+    tablinks[i].className = tablinks[i].className.replace("is-active", "");
   }
-  document.getElementById(tabName).style= "";
+  document.getElementById(tabName).style = "";
   evt.currentTarget.className += " is-active";
-  
+
 };
 
