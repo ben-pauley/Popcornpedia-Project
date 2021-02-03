@@ -53,7 +53,7 @@ $(document).ready(function () {
         var newImg = $("<img>");
         var newDiv = $("<div>");
         newDiv.addClass("column is-flex is-justify-content-center");
-        newImg.addClass("recent-search");
+        newImg.addClass("thumbnail recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
          newImg.css({ width: "300px", height: "450px" });
         $("#recent-search-btns").append(newDiv);
@@ -143,7 +143,7 @@ $(document).ready(function () {
           }).then(function (response) {
 
             var newImg = $("<img>");
-            newImg.addClass("SuggestedFilmImg m-5");
+            newImg.addClass("thumbnail SuggestedFilmImg m-5");
             newImg.attr({
               src: response.Poster,
               alt: response.Title,
@@ -218,7 +218,7 @@ $(document).ready(function () {
     $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
       // Creating images for each actor name
       var newImg = $("<img>");
-      newImg.addClass("m-5");
+      newImg.addClass("thumbnail m-5");
       newImg.attr({
         id: "actorImg" + i,
         src: imdbIdresponse.names[0].image,
@@ -305,7 +305,7 @@ $(document).ready(function () {
     };
     $.ajax(imdbIdUrl).done(function (imdbIdresponse) {
       var newImg = $("<img>");
-      newImg.addClass("m-5");
+      newImg.addClass("thumbnail m-5");
       newImg.attr({
         id: "directorImg" + i,
         src: imdbIdresponse.names[0].image,
