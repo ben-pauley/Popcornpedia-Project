@@ -353,12 +353,14 @@ $(document).ready(function () {
 
       .done(function (nyTimesResponse) {
         $("#film-review").text(nyTimesResponse.results[0].summary_short);
+      console.log (nyTimesResponse.results[0].byline);
       })
       .fail(function (err) {
         throw err;
       });
+      
   }
-
+ 
 
 
 
