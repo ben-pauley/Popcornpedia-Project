@@ -66,14 +66,17 @@ $(document).ready(function () {
 
   function getMovieDetails(movie) {
     $(".tabs").css("display","");
+    $("#tabsContent").css("display","");
+    $("#recent-search-btns").css("display","");
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&plot=full&apikey=trilogy";
     $.ajax({
       url: queryURL,
       method: "GET",
     }).then(function (response) {
       renderMainMovie(response);
-
       $("#actorsTab").empty();
+      $("#crewTab").empty();
+      $("#filmsTab").empty();
       // Converting actor string into array
       var actorArray = response.Actors.split(",");
       // Remove modals content
@@ -90,7 +93,7 @@ $(document).ready(function () {
   }
 
   function getCelebrityInfo(name, i) {
-    var apiKey = "Wvx0+onLZFq2287mLWm4CA==38WLOWdjk3UqQ6FZ";
+    var apiKey = "VAbfi4QxHOneheIB73H956EgFEPmMX7Fo4PweqBO";
     var queryURL =
       "https://api.celebrityninjas.com/v1/search?limit=1&name=" + name;
     $.ajax({
@@ -127,18 +130,17 @@ $(document).ready(function () {
       },
 
       success: function (response) {
+       
         for (var i = 0; i < 4; i++) {
-          console.log(response.Similar.Results[i]);
-          var queryURL =
+           var queryURL =
             "https://www.omdbapi.com/?t=" +
             response.Similar.Results[i].Name +
             "&apikey=trilogy";
-          console.log(response.Similar.Results[i].Name);
+          
           $.ajax({
             url: queryURL,
             method: "GET",
           }).then(function (response) {
-            console.log(response.Poster);
 
             var newImg = $("<img>");
             newImg.addClass("SuggestedFilmImg m-5");
@@ -149,8 +151,9 @@ $(document).ready(function () {
               tabindex: "2",
               title: response.Title,
             });
-            newImg.css({ width: "220px", height: "350px" });
+            newImg.css({ width: "300px", height: "400px" });
             $("#filmsTab").append(newImg);
+
           });
         }
       },
@@ -224,7 +227,7 @@ $(document).ready(function () {
         tabindex: "2",
         title: imdbIdresponse.names[0].title,
       });
-      newImg.css({ width: "150px", height: "150px" });
+      newImg.css({ width: "200px", height: "200px" });
       $("#actorsTab").append(newImg);
       $(document).foundation();
     });
@@ -256,6 +259,7 @@ $(document).ready(function () {
       "<b>Occupation : </b>" +
       occupation
     );
+    
   }
 
   function directorModals(name, age, birthday, nationality, occupation, i) {
@@ -310,7 +314,7 @@ $(document).ready(function () {
         tabindex: "2",
         title: imdbIdresponse.names[0].title,
       });
-      newImg.css({ width: "150px", height: "150px" });
+      newImg.css({ width: "200px", height: "200px" });
       $("#crewTab").append(newImg);
       $(document).foundation();
     });
@@ -331,3 +335,4 @@ function openTab(evt, tabName) {
   evt.currentTarget.className += " is-active";
   
 };
+

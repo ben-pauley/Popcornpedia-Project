@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Compressed CSS -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" />
   <!-- Bulma CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
   <link rel="stylesheet" href="styles/style.css" />
@@ -30,7 +30,7 @@
         <div class="navbar-item">
           <div class="field has-addons">
             <div class="control">
-              <input id="movie-input" type="search" placeholder="Search for a movie" class="input is-rounded">
+              <input id="movie-input" type="search" placeholder="Search for a movie" class="input is-rounded" size="50">
             </div>
             <div class="control">
               <button id="add-movie" type="submit" value="Search" class="button is-info is-rounded is-focused">
@@ -41,37 +41,50 @@
         </div>
       </div>
     </nav>
-
     </div>
   </header>
 
-  </form>
-  <div class="columns is-mobile is-centered m-5" id="recent-search-btns">
+  <div class="hero is-fullheight is-info has-background">
+    <img alt="Fill Murray" class="hero-background is-transparent" src="./assets/movies.jpeg" />
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title is-1">
+          Popcornpedia
+        </h1>
+        <h3 class="subtitle is-2">
+          Your movie encyclopedia
+        </h3>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="columns is-mobile is-centered m-5" id="recent-search-btns" style="display: none">
 
   </div>
 
-    <div id="body-container" class="container" style="display: none">
-      <div class="section">
-        <div class="card is-horizontal columns">
-         
-          <div class="card-image column is-flex is-justify-content-center">
-            <header class="card-header">
-              <h3 id="main-film-name" class="card-header-title title is-3"></h3>
+  <div id="body-container" class="container" style="display: none">
+    <div class="section">
+      <div class="card is-horizontal columns">
+
+        <div class="card-image column is-flex is-justify-content-center">
+          <header class="card-header">
+            <h3 id="main-film-name" class="card-header-title title is-3"></h3>
           </header>
-              <img id="main-film-poster">
-            
-          </div>
-          <div class="card-content column is-flex-grow-5">
-           <p id="main-film-synopsis"></p>
-            </div>
+          <img id="main-film-poster">
+
+        </div>
+        <div class="card-content column is-flex-grow-5">
+          <p id="main-film-synopsis"></p>
         </div>
       </div>
     </div>
- 
+  </div>
 
 
 
-  <nav class="tabs is-boxed is-centered is-fullwidth is-medium" style="display:none" >
+
+  <nav class="tabs is-boxed is-centered is-fullwidth is-medium" style="display:none">
     <ul>
       <li class="tab is-active" onclick="openTab(event,'actorsTab')">
         <a>
@@ -94,7 +107,7 @@
     </ul>
   </nav>
 
-  <div class="container section is-horizontal-center">
+  <div id="tabsContent" class="container section is-horizontal-center" style="display:none">
     <div id="actorsTab" class="columns is-mobile is-centered content-tab">
     </div>
     <div id="crewTab" class="columns is-mobile is-centered content-tab" style="display:none">
@@ -103,7 +116,7 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!-- Compressed JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
