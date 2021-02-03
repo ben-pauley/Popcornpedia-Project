@@ -345,6 +345,11 @@ $(document).ready(function () {
         query: movie,
       });
 
+      $.ajax({
+        url: url,
+        method: "GET",
+      })
+
 
 
 
