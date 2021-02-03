@@ -13,7 +13,7 @@ $(document).ready(function () {
   $(document).on("click", ".recent-search", getMovieClicked);
 
   function getMovieClicked() {
-    getMovieDetails($(this).attr("movie-name"));
+    getMovieDetails($(this).attr("alt"));
   }
 
   function storeRecentSearches(recentSearches) {
@@ -43,16 +43,33 @@ $(document).ready(function () {
       if (recentSearches[i] === undefined) {
         return;
       }
-      var newButton = $("<button>");
-      newButton.addClass("button secondary recent-search");
-      newButton.attr("movie-name", recentSearches[i]);
-      newButton.text(recentSearches[i]);
-      $("#recent-search-btns").prepend(newButton);
+      var queryURL =
+        "https://www.omdbapi.com/?t=" + recentSearches[i] + "&apikey=trilogy";
+
+      $.ajax({
+        url: queryURL,
+        method: "GET",
+      }).then(function (response) {
+
+        var newImg = $("<img>");
+        var newDiv = $("<div>");
+        newDiv.addClass("column is-flex is-justify-content-center");
+        newImg.addClass("thumbnail recent-search");
+        newImg.attr({ src: response.Poster, alt: response.Title });
+        newImg.css({ width: "300px", height: "450px" });
+        $("#recent-search-btns").append(newDiv);
+        newDiv.append(newImg);
+
+      });
+
     }
   }
 
   function getMovieDetails(movie) {
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+    $(".tabs").css("display", "");
+    $("#tabsContent").css("display", "");
+    $("#recent-search-btns").css("display", "");
+    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&plot=full&apikey=trilogy";
     $.ajax({
       url: queryURL,
       method: "GET",
@@ -122,6 +139,7 @@ $(document).ready(function () {
       title: imdbResponse.names[0].title,
     });
 
+
     $("#actorsTab").append(newImg);
 
     $(document).foundation();
@@ -166,17 +184,18 @@ $(document).ready(function () {
     $("#actorName").text(name);
     $("#actorInfo").html(
       "<b>Age: </b>" +
-        age +
-        "<br>" +
-        "<b>Birthday : <b/>" +
-        birthday +
-        "<br>" +
-        "<b>Nationality : </b>" +
-        nationality +
-        "<br>" +
-        "<b>Occupation : </b>" +
-        occupation
+      age +
+      "<br>" +
+      "<b>Birthday : <b/>" +
+      birthday +
+      "<br>" +
+      "<b>Nationality : </b>" +
+      nationality +
+      "<br>" +
+      "<b>Occupation : </b>" +
+      occupation
     );
+
   }
 
   function renderCrewTab(omdbResponse) {
@@ -271,16 +290,16 @@ $(document).ready(function () {
     $("#directorName").text(name);
     $("#directorInfo").html(
       "<b>Age: </b>" +
-        age +
-        "<br>" +
-        "<b>Birthday : <b/>" +
-        birthday +
-        "<br>" +
-        "<b>Nationality : </b>" +
-        nationality +
-        "<br>" +
-        "<b>Occupation : </b>" +
-        occupation
+      age +
+      "<br>" +
+      "<b>Birthday : <b/>" +
+      birthday +
+      "<br>" +
+      "<b>Nationality : </b>" +
+      nationality +
+      "<br>" +
+      "<b>Occupation : </b>" +
+      occupation
     );
   }
 
@@ -335,3 +354,19 @@ $(document).ready(function () {
     $("#filmsTab").append(newImg);
   }
 });
+
+function openTab(evt, tabName) {
+  var i, x, tablinks;
+  x = $(".content-tab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none ";
+  }
+  tablinks = $(".tab");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace("is-active", "");
+  }
+  document.getElementById(tabName).style = "";
+  evt.currentTarget.className += " is-active";
+
+};
+

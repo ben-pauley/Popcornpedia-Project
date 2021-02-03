@@ -1,97 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en" class="has-navbar-fixed-top">
 
-    <!-- Compressed CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
-      crossorigin="anonymous"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="styles/style.css" />
+  <!-- Compressed CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+    integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous" />
+  <!-- Bulma CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <link rel="stylesheet" href="styles/style.css" />
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <!-- Adding an icon to the title -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <title>Popcornpedia</title>
+</head>
 
-    <title>Popcornpedia</title>
-  </head>
+<body>
+  <header>
 
-  <body>
-    <div class="callout medium secondary">
-      <div class="row columns text-center">
-        <form>
-          <div>
-            <label class="text-left">
-              <h1>Search for a movie</h1>
-            </label>
-            <input
-              type="text"
-              placeholder="(Ex. Wonder Woman, Pulp Fiction, Frozen, etc.)"
-              id="movie-input"
-            />
+    <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
+
+      <div class="navbar-start">
+        <img src="assets/logo.png" alt="" style="max-width:8%">
+        <h2 class="title is-2 ml-3" style="line-height:2; color:white">Popcornpedia</h2>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="field has-addons">
+            <div class="control">
+              <input id="movie-input" type="search" placeholder="Search for a movie" class="input is-rounded" size="50">
+            </div>
+            <div class="control">
+              <button id="add-movie" type="submit" value="Search" class="button is-info is-rounded is-focused">
+                Search
+              </button>
+            </div>
           </div>
-          <div class="text-right">
-            <input
-              type="submit"
-              value="Search"
-              class="button alert"
-              id="add-movie"
-            />
-          </div>
-        </form>
-        <div
-          class="row columns small-4 stacked button-group"
-          id="recent-search-btns"
-        ></div>
+        </div>
+      </div>
+    </nav>
+    </div>
+  </header>
+
+  <div class="hero is-fullheight is-info has-background">
+    <img alt="Fill Murray" class="hero-background is-transparent" src="./assets/movies.jpeg" />
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title is-1">
+          Popcornpedia
+        </h1>
+        <h3 class="subtitle is-2">
+          Your movie encyclopedia
+        </h3>
       </div>
     </div>
+  </div>
 
-    <div
-      class="row columns medium-10"
-      id="body-container"
-      style="display: none"
-    >
-      <div class="media-object" id="movie-info">
-        <div class="media-object-section">
-          <img id="main-film-poster" />
-        </div>
-        <div class="media-object-section">
-          <h3 id="main-film-name"></h3>
-          <p id="main-film-synopsis"></p>
-        </div>
-      </div>
 
-      <ul class="tabs" data-active-collapse="true" data-tabs id="main-content">
-        <li class="tabs-title is-active">
-          <a href="#actorsTab" aria-selected="true">Actors</a>
-        </li>
-        <li class="tabs-title"><a href="#crewTab">Crew</a></li>
-        <li class="tabs-title"><a href="#filmsTab">Films you may like</a></li>
-      </ul>
+  <div class="columns is-mobile is-centered m-5" id="recent-search-btns" style="display: none">
 
-      <div class="tabs-content" data-tabs-content="main-content">
-        <div class="tabs-panel is-active" id="actorsTab">
-          <!-- <div class="reveal" id="actorInfo" data-reveal>
-          <h1 id="actorName"></h1>
-          <button class="close-button" data-close aria-label="Close modal" type="button">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div> -->
+  </div>
+
+  <div id="body-container" class="container" style="display: none">
+    <div class="section">
+      <div class="card is-horizontal columns">
+        <div class="card-image column is-flex is-justify-content-center">
+          <img id="main-film-poster" class="thumbnail">
+          <div class="card-content column is-flex-grow-5">
+            <header class="card-header">
+              <h3 id="main-film-name" class="card-header-title title is-3"></h3>
+            </header>
+            <p id="main-film-synopsis"></p>
+          </div>
         </div>
-        <div class="tabs-panel" id="crewTab"></div>
-        <div class="tabs-panel" id="filmsTab"></div>
       </div>
     </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Compressed JavaScript -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
-      crossorigin="anonymous"
-    ></script>
-    <script type="text/javascript" src="scripts/script.js"></script>
-  </body>
+
+
+  <nav class="tabs is-boxed is-centered is-fullwidth is-medium" style="display:none">
+    <ul>
+      <li class="tab is-active" onclick="openTab(event,'actorsTab')">
+        <a>
+          <span class="icon is-small"><i class="fas fa-user-circle" aria-hidden="true"></i></span>
+          <span>Actors</span>
+        </a>
+      </li>
+      <li class="tab" onclick="openTab(event,'crewTab')">
+        <a>
+          <span class="icon is-small"><i class="fas fa-glasses" aria-hidden="true"></i></span>
+          <span>Crew</span>
+        </a>
+      </li>
+      <li class="tab" onclick="openTab(event,'filmsTab')">
+        <a>
+          <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+          <span>Films you may like</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="tabsContent" class="container section is-horizontal-center" style="display:none">
+    <div id="actorsTab" class="columns is-mobile is-centered content-tab">
+    </div>
+    <div id="crewTab" class="columns is-mobile is-centered content-tab" style="display:none">
+    </div>
+    <div id="filmsTab" class="columns is-mobile is-centered content-tab" style="display:none">
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Compressed JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+    integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="scripts/script.js"></script>
+</body>
+
 </html>
