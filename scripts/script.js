@@ -334,4 +334,23 @@ $(document).ready(function () {
 
     $("#filmsTab").append(newImg);
   }
+
+
+  function nyTimes(movie) {
+    var url = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
+    url +=
+      "?" +
+      $.param({
+        "api-key": "yZy7D7qdolnKnRDtSuRYxUWeYDF1hyVr",
+        query: movie,
+      });
+
+
+
+
+
+
+
+
+
 });
