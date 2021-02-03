@@ -74,20 +74,21 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET",
     }).then(function (omdbResponse) {
-      renderMainMovie(omdbResponse);
+      renderMainMovie(omdbResponse,movie);
       renderActorsTab(omdbResponse);
       renderCrewTab(omdbResponse);
       renderSimilarMoviesTab(movie);
     });
   }
 
-  function renderMainMovie(omdbResponse) {
+  function renderMainMovie(omdbResponse,movie) {
     $("#body-container").css("display", "block");
     $("#main-film-poster").attr("src", omdbResponse.Poster);
     $("#main-film-name").text(
       omdbResponse.Title + " (" + omdbResponse.Year + ")"
     );
     $("#main-film-synopsis").text(omdbResponse.Plot);
+    nyTimes(movie);
   }
 
   function renderActorsTab(omdbResponse) {
@@ -353,6 +354,35 @@ $(document).ready(function () {
 
     $("#filmsTab").append(newImg);
   }
+
+
+  function nyTimes(movie) {
+    var url = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
+    url +=
+      "?" +
+      $.param({
+        "api-key": "yZy7D7qdolnKnRDtSuRYxUWeYDF1hyVr",
+        query: movie,
+      });
+
+      $.ajax({
+        url: url,
+        method: "GET",
+      })
+
+      .done(function (nyTimesResponse) {
+        $("#film-review").text(nyTimesResponse.results[0].summary_short);
+       $("#critic-name").text("~ " + nyTimesResponse.results[0].byline);
+      })
+      .fail(function (err) {
+        throw err;
+      });
+      
+  }
+ 
+
+
+
 });
 
 function openTab(evt, tabName) {
