@@ -57,21 +57,21 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET",
     }).then(function (omdbResponse) {
-      renderMainMovie(omdbResponse);
+      renderMainMovie(omdbResponse,movie);
       renderActorsTab(omdbResponse);
       renderCrewTab(omdbResponse);
       renderSimilarMoviesTab(movie);
     });
   }
 
-  function renderMainMovie(omdbResponse) {
+  function renderMainMovie(omdbResponse,movie) {
     $("#body-container").css("display", "block");
     $("#main-film-poster").attr("src", omdbResponse.Poster);
     $("#main-film-name").text(
       omdbResponse.Title + " (" + omdbResponse.Year + ")"
     );
     $("#main-film-synopsis").text(omdbResponse.Plot);
-    $("#main-film-synopsis").
+    nyTimes(movie);
   }
 
   function renderActorsTab(omdbResponse) {
@@ -352,7 +352,7 @@ $(document).ready(function () {
       })
 
       .done(function (nyTimesResponse) {
-        return nyTimesResponse.results[0].summary_short;
+        $("#film-review").text(nyTimesResponse.results[0].summary_short);
       })
       .fail(function (err) {
         throw err;
