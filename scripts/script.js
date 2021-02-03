@@ -56,27 +56,29 @@ $(document).ready(function () {
     $.ajax({
       url: queryURL,
       method: "GET",
-    }).then(function (response) {
-      renderMainMovie(response);
-      renderActorsTab(response);
-      renderCrewTab(response);
+    }).then(function (omdbResponse) {
+      renderMainMovie(omdbResponse);
+      renderActorsTab(omdbResponse);
+      renderCrewTab(omdbResponse);
       renderSimilarMoviesTab(movie);
     });
   }
 
-  function renderMainMovie(response) {
+  function renderMainMovie(omdbResponse) {
     $("#body-container").css("display", "block");
-    $("#main-film-poster").attr("src", response.Poster);
-    $("#main-film-name").text(response.Title + " (" + response.Year + ")");
-    $("#main-film-synopsis").text(response.Plot);
+    $("#main-film-poster").attr("src", omdbResponse.Poster);
+    $("#main-film-name").text(
+      omdbResponse.Title + " (" + omdbResponse.Year + ")"
+    );
+    $("#main-film-synopsis").text(omdbResponse.Plot);
   }
 
-  function renderActorsTab(response) {
+  function renderActorsTab(omdbResponse) {
     $("#actorsTab").empty();
     // Remove modals content
     $(".reveal-overlay").empty();
     // Converting actor string into array
-    var actorArray = response.Actors.split(",");
+    var actorArray = omdbResponse.Actors.split(",");
     // For loop that create actors images and their related infomation
     for (var i = 0; i < actorArray.length; i++) {
       var actorName = actorArray[i].trim();
