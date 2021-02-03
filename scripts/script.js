@@ -350,6 +350,14 @@ $(document).ready(function () {
         method: "GET",
       })
 
+      .done(function (nyTimesResponse) {
+        return nyTimesResponse.results[0].summary_short;
+      })
+      .fail(function (err) {
+        throw err;
+      });
+  }
+
 
 
 
