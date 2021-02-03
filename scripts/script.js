@@ -71,6 +71,7 @@ $(document).ready(function () {
       omdbResponse.Title + " (" + omdbResponse.Year + ")"
     );
     $("#main-film-synopsis").text(omdbResponse.Plot);
+    $("#main-film-synopsis").
   }
 
   function renderActorsTab(omdbResponse) {
@@ -357,11 +358,6 @@ $(document).ready(function () {
         throw err;
       });
   }
-
-
-
-
-
 
 
 
