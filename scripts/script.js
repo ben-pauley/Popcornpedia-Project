@@ -369,7 +369,13 @@ $(document).ready(function () {
   });
 
   function displaySimilarMoviesInfo(omdbResponse, i) {
-  }
+  
+   var movieObject = {
+      title: omdbResponse.Title,
+      plot: omdbResponse.Plot,
+      rating: omdbResponse.Rated,
+      year: omdbResponse.Year
+    };
 
 
 
