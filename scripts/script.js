@@ -302,8 +302,11 @@ $(document).ready(function () {
       occupation
     );
   }
-
+  
   function renderSimilarMoviesTab(movie) {
+    $("#filmsTab").empty();
+    // $(".reveal-overlay").empty();
+​
     $.ajax({
       type: "GET",
       url: "https://tastedive.com/api/similar?limit=4",
@@ -314,12 +317,15 @@ $(document).ready(function () {
         q: movie,
         k: "400900-Popcornp-N9NY6GRY",
       },
-
+​
       success: function (tasteDiveResponse) {
-        fetchPosters(tasteDiveResponse);
+      
+        for (var i = 0; i < 4; i++) {
+​
+          fetchPosters(tasteDiveResponse, i);
+        }
       },
     });
-  }
 
   function fetchPosters(tasteDiveResponse) {
     $("#filmsTab").empty();

@@ -38,7 +38,9 @@ img:hover {
 
 };
 
-
+#tabsContent{
+display:none;
+}
 .is-horizontal-center {
   justify-content: center;
 };
