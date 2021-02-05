@@ -358,11 +358,14 @@ $(document).ready(function () {
       "data-tooltip": "",
       tabindex: "2",
       title: omdbResponse.Title,
+      id: "movieImg" + i,
+      
     });
 
     $("#filmsTab").append(newImg);
   }
 });
+
 
 function openTab(evt, tabName) {
   var i, x, tablinks;
