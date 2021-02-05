@@ -1,7 +1,7 @@
 html,
 body {
-  width: 100%;
   overflow-x: hidden;
+  width: 100%;
 }
 ​ #movie-info {
   border: 2px solid grey;
@@ -63,6 +63,9 @@ img:hover {
 }
 
 @media only screen and (max-width: 600px) {
+  body {
+    padding-top: 100px;
+  }
   .recent-search {
     height: 150px;
     width: 100px;
@@ -111,6 +114,9 @@ img:hover {
 }
 
 @media only screen and (min-width: 700px) {
+  body {
+    padding-top: 40px;
+  }
   .recent-search {
     height: 450px;
     width: 300px;
