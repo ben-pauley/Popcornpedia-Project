@@ -50,7 +50,6 @@ $(document).ready(function () {
         url: queryURL,
         method: "GET",
       }).then(function (response) {
-
         var newImg = $("<img>");
         var newDiv = $("<div>");
         newDiv.addClass("column is-flex is-justify-content-center");
@@ -58,9 +57,7 @@ $(document).ready(function () {
         newImg.attr({ src: response.Poster, alt: response.Title });
         $("#recent-search-btns").append(newDiv);
         newDiv.append(newImg);
-
       });
-
     }
   }
 
@@ -68,25 +65,28 @@ $(document).ready(function () {
     $(".tabs").css("display", "");
     $("#tabsContent").css("display", "");
     $("#recent-search-btns").css("display", "");
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&plot=full&apikey=trilogy";
+    var queryURL =
+      "https://www.omdbapi.com/?t=" + movie + "&plot=full&apikey=trilogy";
     $.ajax({
       url: queryURL,
       method: "GET",
     }).then(function (omdbResponse) {
-      renderMainMovie(omdbResponse);
+      $(".hero").css("display", "none");
+      renderMainMovie(omdbResponse, movie);
       renderActorsTab(omdbResponse);
       renderCrewTab(omdbResponse);
       renderSimilarMoviesTab(movie);
     });
   }
 
-  function renderMainMovie(omdbResponse) {
+  function renderMainMovie(omdbResponse, movie) {
     $("#body-container").css("display", "block");
     $("#main-film-poster").attr("src", omdbResponse.Poster);
     $("#main-film-name").text(
       omdbResponse.Title + " (" + omdbResponse.Year + ")"
     );
     $("#main-film-synopsis").text(omdbResponse.Plot);
+    nyTimes(movie);
   }
 
   function renderActorsTab(omdbResponse) {
@@ -138,7 +138,6 @@ $(document).ready(function () {
       title: imdbResponse.names[0].title,
     });
 
-
     $("#actorsTab").append(newImg);
 
     $(document).foundation();
@@ -183,18 +182,17 @@ $(document).ready(function () {
     $("#actorName").text(name);
     $("#actorInfo").html(
       "<b>Age: </b>" +
-      age +
-      "<br>" +
-      "<b>Birthday : <b/>" +
-      birthday +
-      "<br>" +
-      "<b>Nationality : </b>" +
-      nationality +
-      "<br>" +
-      "<b>Occupation : </b>" +
-      occupation
+        age +
+        "<br>" +
+        "<b>Birthday : <b/>" +
+        birthday +
+        "<br>" +
+        "<b>Nationality : </b>" +
+        nationality +
+        "<br>" +
+        "<b>Occupation : </b>" +
+        occupation
     );
-
   }
 
   function renderCrewTab(omdbResponse) {
@@ -289,16 +287,16 @@ $(document).ready(function () {
     $("directorName").addClass("modal-title") 
     $("#directorInfo").html(
       "<b>Age: </b>" +
-      age +
-      "<br>" +
-      "<b>Birthday : <b/>" +
-      birthday +
-      "<br>" +
-      "<b>Nationality : </b>" +
-      nationality +
-      "<br>" +
-      "<b>Occupation : </b>" +
-      occupation
+        age +
+        "<br>" +
+        "<b>Birthday : <b/>" +
+        birthday +
+        "<br>" +
+        "<b>Nationality : </b>" +
+        nationality +
+        "<br>" +
+        "<b>Occupation : </b>" +
+        occupation
     );
   }
 
@@ -363,7 +361,6 @@ function displayPosters(omdbResponse,i) {
 
     });
     $("#filmsTab").append(newImg);
-  
 }
 
 function displaySimilarMoviesInfo(omdbResponse, i) {
@@ -404,6 +401,31 @@ function similarMoviesModals(obj, i) {
   }  
       
 });    
+  }
+
+  function nyTimes(movie) {
+    var url = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
+    url +=
+      "?" +
+      $.param({
+        "api-key": "yZy7D7qdolnKnRDtSuRYxUWeYDF1hyVr",
+        query: movie,
+      });
+
+    $.ajax({
+      url: url,
+      method: "GET",
+    })
+
+      .done(function (nyTimesResponse) {
+        $("#film-review").text(nyTimesResponse.results[0].summary_short);
+        $("#critic-name").text("~ " + nyTimesResponse.results[0].byline);
+      })
+      .fail(function (err) {
+        throw err;
+      });
+  }
+});
 
 function openTab(evt, tabName) {
   var i, x, tablinks;
@@ -417,5 +439,4 @@ function openTab(evt, tabName) {
   }
   document.getElementById(tabName).style = "";
   evt.currentTarget.className += " is-active";
-
 }
