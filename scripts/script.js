@@ -391,21 +391,22 @@ function similarMoviesModals(obj, i) {
     modalDiv.append("<h2 id=movieName></h2>");
     modalDiv.append("<div id=movieInfo></div>");
     modalDiv.append(
-      "<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>"
-      );
+      "<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>");
+
       $("#filmsTab").append(modalDiv);
       $("#movieName").text(obj.title);
-    
-    }
-
-
-
-
-
-
-}
-
-
+      $("#movieInfo").html(
+        "<b>Year: </b>" +
+        obj.year +
+        "<br>" +
+        "<b>Rating : <b/>" +
+        obj.rating +
+        "<br>" +
+        "<b>Plot : </b>" +
+        obj.plot);
+  }  
+      
+};    
 
 
 

@@ -6,9 +6,9 @@
 #midpage-title {
   line-height:2; 
   color:white;
-
- 
+  font-family: 'Orbitron', sans-serif;
 }
+
 #main-film-poster {
   width: 200px;
   border-radius: 10px;
