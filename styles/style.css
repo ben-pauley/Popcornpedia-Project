@@ -1,13 +1,25 @@
+#logo{
+  max-width:8%;
+
+}
+
+#midpage-title {
+  line-height:2; 
+  color:white;
+
+ 
+}
 #main-film-poster {
   width: 200px;
   border-radius: 10px;
   margin: 5px;
-};
-
+}
 #movie-info {
   border: 2px solid grey;
   border-radius: 10px;
 };
+
+
 img {
   border: 1px solid #ddd; /* Gray border */
   border-radius: 10px;  /* Rounded border */
