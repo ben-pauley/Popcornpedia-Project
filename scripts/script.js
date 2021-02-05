@@ -56,7 +56,6 @@ $(document).ready(function () {
         newDiv.addClass("column is-flex is-justify-content-center");
         newImg.addClass("thumbnail recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
-        newImg.css({ width: "300px", height: "450px" });
         $("#recent-search-btns").append(newDiv);
         newDiv.append(newImg);
 
@@ -128,8 +127,8 @@ $(document).ready(function () {
   function setActorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail m-5");
-    newImg.css({ width: "200px", height: "200px" });
+    newImg.addClass("thumbnail");
+   
     newImg.attr({
       id: "actorImg" + i,
       src: imdbResponse.names[0].image,
@@ -235,8 +234,7 @@ $(document).ready(function () {
   function setDirectorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail m-5");
-    newImg.css({ width: "200px", height: "200px" });
+    newImg.addClass("thumbnail");
     newImg.attr({
       id: "directorImg" + i,
       src: imdbResponse.names[0].image,
@@ -352,7 +350,7 @@ $(document).ready(function () {
   function displayPosters(omdbResponse) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail SuggestedFilmImg m-5");
+    newImg.addClass("thumbnail SuggestedFilmImg");
     newImg.css({ width: "300px", height: "400px" });
     newImg.attr({
       src: omdbResponse.Poster,
@@ -378,7 +376,6 @@ function displaySimilarMoviesInfo(omdbResponse, i) {
   };
 
   similarMoviesModals(movieObject, i);
-
 }
 
 //defining the similar modals function
@@ -406,7 +403,7 @@ function similarMoviesModals(obj, i) {
         obj.plot);
   }  
       
-};    
+;    
 
 
 
