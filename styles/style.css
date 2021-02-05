@@ -23,3 +23,23 @@ img:hover {
 .is-horizontal-center {
   justify-content: center;
 };
+
+.card.is-horizontal {
+  display: flex;
+  flex-basis: 50ex;
+  flex-grow: 0;
+  flex-shrink: 1;
+}
+.card.is-horizontal .card-image {
+  flex: 4;
+  flex-shrink: 1;
+}
+​
+.card.is-horizontal .card-image .image img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.card.is-horizontal .card-content {
+  flex: 3;
+}
