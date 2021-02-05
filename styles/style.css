@@ -1,38 +1,27 @@
-#main-film-poster {
-  width: 200px;
-  border-radius: 10px;
-  margin: 5px;
-};
-
-#movie-info {
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+​ #movie-info {
   border: 2px solid grey;
   border-radius: 10px;
-};
-img {
+}
+​ img {
   border: 1px solid #ddd; /* Gray border */
-  border-radius: 10px;  /* Rounded border */
+  border-radius: 10px; /* Rounded border */
   padding: 5px; /* Some padding */
   width: 150px; /* Set a small width */
 }
-
+​
 /* Add a hover effect (blue shadow) */
 img:hover {
   box-shadow: 0 0 4px 2px rgba(0, 140, 186, 0.5);
 }
-
-#main-film-poster { 
-  width: 300px;
-  height: 450px;
-
-};
-
-
-.is-horizontal-center {
+​ .is-horizontal-center {
   justify-content: center;
-};
-
-
-.card.is-horizontal {
+}
+​ ​ .card.is-horizontal {
   display: flex;
   flex-basis: 50ex;
   flex-grow: 0;
@@ -42,8 +31,7 @@ img:hover {
   flex: 4;
   flex-shrink: 1;
 }
-
-.card.is-horizontal .card-image .image img {
+​ .card.is-horizontal .card-image .image img {
   height: 100%;
   object-fit: cover;
   object-position: center;
@@ -52,16 +40,116 @@ img:hover {
   flex: 3;
 }
 .hero.has-background {
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 .hero-background {
-  position: absolute;
+  height: 100%;
   object-fit: cover;
   object-position: center center;
+  position: absolute;
   width: 100%;
-  height: 100%;
 }
 .hero-background.is-transparent {
   opacity: 0.5;
+}
+.footer {
+  background-color: rgb(69, 67, 67);
+  padding: 10px;
+}
+.footer-text {
+  color: white;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding-top: 100px;
+  }
+  .recent-search {
+    height: 150px;
+    width: 100px;
+  }
+  .recent-search-col {
+    padding: 0px;
+  }
+  #main-film-poster {
+    height: 150px;
+    width: 100px;
+  }
+  #main-film-synopsis {
+    font-size: 10px;
+  }
+  #main-film-name {
+    font-size: 20px;
+  }
+  .SuggestedFilmImg {
+    height: 150px;
+    margin: 0px;
+    width: 100px;
+  }
+  .tabs {
+    font-size: 0.75rem;
+  }
+  #tabsContent {
+    margin: 0px;
+    padding: 0px;
+  }
+  #actorImg0,
+  #actorImg1,
+  #actorImg2,
+  #actorImg3 {
+    height: 80px;
+    margin: 0px;
+    width: 80px;
+  }
+  #directorImg0,
+  #directorImg1,
+  #directorImg2,
+  #directorImg3 {
+    height: 80px;
+    margin: 0px;
+    width: 80px;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  body {
+    padding-top: 40px;
+  }
+  .recent-search {
+    height: 450px;
+    width: 300px;
+  }
+
+  #main-film-poster {
+    border-radius: 10px;
+    height: 450px;
+    margin: 5px;
+    width: 300px;
+  }
+  .SuggestedFilmImg {
+    height: 450px;
+    margin: 1.5rem;
+    width: 300px;
+  }
+  .tabs {
+    font-size: 1.25rem;
+  }
+  #actorImg0,
+  #actorImg1,
+  #actorImg2,
+  #actorImg3 {
+    height: 200px;
+    margin: 1.5rem;
+    width: 200px;
+  }
+  #directorImg0,
+  #directorImg1,
+  #directorImg2,
+  #directorImg3 {
+    height: 200px;
+    margin: 1.5rem;
+    width: 200px;
+  }
 }

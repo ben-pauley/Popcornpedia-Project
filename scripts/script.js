@@ -50,7 +50,6 @@ $(document).ready(function () {
         url: queryURL,
         method: "GET",
       }).then(function (response) {
-
         var newImg = $("<img>");
         var newDiv = $("<div>");
         newDiv.addClass("column is-flex is-justify-content-center");
@@ -59,9 +58,7 @@ $(document).ready(function () {
         newImg.css({ width: "300px", height: "450px" });
         $("#recent-search-btns").append(newDiv);
         newDiv.append(newImg);
-
       });
-
     }
   }
 
@@ -69,25 +66,28 @@ $(document).ready(function () {
     $(".tabs").css("display", "");
     $("#tabsContent").css("display", "");
     $("#recent-search-btns").css("display", "");
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&plot=full&apikey=trilogy";
+    var queryURL =
+      "https://www.omdbapi.com/?t=" + movie + "&plot=full&apikey=trilogy";
     $.ajax({
       url: queryURL,
       method: "GET",
     }).then(function (omdbResponse) {
-      renderMainMovie(omdbResponse);
+      $(".hero").css("display", "none");
+      renderMainMovie(omdbResponse, movie);
       renderActorsTab(omdbResponse);
       renderCrewTab(omdbResponse);
       renderSimilarMoviesTab(movie);
     });
   }
 
-  function renderMainMovie(omdbResponse) {
+  function renderMainMovie(omdbResponse, movie) {
     $("#body-container").css("display", "block");
     $("#main-film-poster").attr("src", omdbResponse.Poster);
     $("#main-film-name").text(
       omdbResponse.Title + " (" + omdbResponse.Year + ")"
     );
     $("#main-film-synopsis").text(omdbResponse.Plot);
+    nyTimes(movie);
   }
 
   function renderActorsTab(omdbResponse) {
@@ -128,8 +128,8 @@ $(document).ready(function () {
   function setActorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail");
-    newImg.css({ width: "150px", height: "150px" });
+    newImg.addClass("thumbnail m-5");
+    newImg.css({ width: "200px", height: "200px" });
     newImg.attr({
       id: "actorImg" + i,
       src: imdbResponse.names[0].image,
@@ -138,7 +138,6 @@ $(document).ready(function () {
       tabindex: "2",
       title: imdbResponse.names[0].title,
     });
-
 
     $("#actorsTab").append(newImg);
 
@@ -184,18 +183,17 @@ $(document).ready(function () {
     $("#actorName").text(name);
     $("#actorInfo").html(
       "<b>Age: </b>" +
-      age +
-      "<br>" +
-      "<b>Birthday : <b/>" +
-      birthday +
-      "<br>" +
-      "<b>Nationality : </b>" +
-      nationality +
-      "<br>" +
-      "<b>Occupation : </b>" +
-      occupation
+        age +
+        "<br>" +
+        "<b>Birthday : <b/>" +
+        birthday +
+        "<br>" +
+        "<b>Nationality : </b>" +
+        nationality +
+        "<br>" +
+        "<b>Occupation : </b>" +
+        occupation
     );
-
   }
 
   function renderCrewTab(omdbResponse) {
@@ -235,8 +233,8 @@ $(document).ready(function () {
   function setDirectorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail");
-    newImg.css({ width: "150px", height: "150px" });
+    newImg.addClass("thumbnail m-5");
+    newImg.css({ width: "200px", height: "200px" });
     newImg.attr({
       id: "directorImg" + i,
       src: imdbResponse.names[0].image,
@@ -290,16 +288,16 @@ $(document).ready(function () {
     $("#directorName").text(name);
     $("#directorInfo").html(
       "<b>Age: </b>" +
-      age +
-      "<br>" +
-      "<b>Birthday : <b/>" +
-      birthday +
-      "<br>" +
-      "<b>Nationality : </b>" +
-      nationality +
-      "<br>" +
-      "<b>Occupation : </b>" +
-      occupation
+        age +
+        "<br>" +
+        "<b>Birthday : <b/>" +
+        birthday +
+        "<br>" +
+        "<b>Nationality : </b>" +
+        nationality +
+        "<br>" +
+        "<b>Occupation : </b>" +
+        occupation
     );
   }
 
@@ -341,8 +339,8 @@ $(document).ready(function () {
   function displayPosters(omdbResponse) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail SuggestedFilmImg");
-    newImg.css({ width: "150px", height: "150px" });
+    newImg.addClass("thumbnail SuggestedFilmImg m-5");
+    newImg.css({ width: "300px", height: "400px" });
     newImg.attr({
       src: omdbResponse.Poster,
       alt: omdbResponse.Title,
@@ -352,6 +350,29 @@ $(document).ready(function () {
     });
 
     $("#filmsTab").append(newImg);
+  }
+
+  function nyTimes(movie) {
+    var url = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
+    url +=
+      "?" +
+      $.param({
+        "api-key": "yZy7D7qdolnKnRDtSuRYxUWeYDF1hyVr",
+        query: movie,
+      });
+
+    $.ajax({
+      url: url,
+      method: "GET",
+    })
+
+      .done(function (nyTimesResponse) {
+        $("#film-review").text(nyTimesResponse.results[0].summary_short);
+        $("#critic-name").text("~ " + nyTimesResponse.results[0].byline);
+      })
+      .fail(function (err) {
+        throw err;
+      });
   }
 });
 
@@ -367,6 +388,4 @@ function openTab(evt, tabName) {
   }
   document.getElementById(tabName).style = "";
   evt.currentTarget.className += " is-active";
-
-};
-
+}

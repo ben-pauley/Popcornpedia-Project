@@ -78,6 +78,9 @@
               <h3 id="main-film-name" class="card-header-title title is-3"></h3>
             </header>
             <p id="main-film-synopsis"></p>
+            <br>
+            <p><em id="film-review"></em></p>
+            <p id="critic-name"></p>
           </div>
         </div>
       </div>
@@ -87,19 +90,19 @@
   <!-- Adding actors, crew and suggested films tabs -->
   <nav class="tabs is-boxed is-centered is-fullwidth is-medium" style="display:none">
     <ul>
-      <li class="tab is-active" onclick="openTab(event,'actorsTab')">
+      <li class="tab is-active" onclick="openTab(event, 'actorsTab')">
         <a>
           <span class="icon is-small"><i class="fas fa-user-circle" aria-hidden="true"></i></span>
           <span>Actors</span>
         </a>
       </li>
-      <li class="tab" onclick="openTab(event,'crewTab')">
+      <li class="tab" onclick="openTab(event, 'crewTab')">
         <a>
           <span class="icon is-small"><i class="fas fa-glasses" aria-hidden="true"></i></span>
           <span>Crew</span>
         </a>
       </li>
-      <li class="tab" onclick="openTab(event,'filmsTab')">
+      <li class="tab" onclick="openTab(event, 'filmsTab')">
         <a>
           <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
           <span>Films you may like</span>
@@ -109,12 +112,9 @@
   </nav>
 
   <div id="tabsContent" class="container section is-horizontal-center" style="display:none">
-    <div id="actorsTab" class="columns is-mobile is-centered content-tab">
-    </div>
-    <div id="crewTab" class="columns is-mobile is-centered content-tab" style="display:none">
-    </div>
-    <div id="filmsTab" class="columns is-mobile is-centered content-tab" style="display:none">
-    </div>
+    <div id="actorsTab" class="columns is-mobile is-centered content-tab"></div>
+    <div id="crewTab" class="columns is-mobile is-centered content-tab" style="display:none"></div>
+    <div id="filmsTab" class="columns is-mobile is-centered content-tab" style="display:none"></div>
   </div>
 
   <!-- jQuery CDN -->
@@ -127,5 +127,13 @@
   <!-- link to script file -->
   <script type="text/javascript" src="scripts/script.js"></script>
 </body>
+
+<footer class="footer">
+  <div>
+    <p class="footer-text">
+      Expand your knowledge of movies, at <b>Popcornpedia</b> ~ Created By ~ <b>Ben, Saadia, Gurvinder & Shaynade</b>. 
+    </p>
+  </div>
+</footer>
 
 </html>
