@@ -329,60 +329,77 @@ $(document).ready(function () {
 
   }
 
-    function fetchPosters(tasteDiveResponse) {
-      $("#filmsTab").empty();
+  function fetchPosters(tasteDiveResponse) {
+    $("#filmsTab").empty();
 
-      for (var i = 0; i < 4; i++) {
-        var queryURL =
-          "https://www.omdbapi.com/?t=" +
-          tasteDiveResponse.Similar.Results[i].Name +
-          "&apikey=trilogy";
-        $.ajax({
-          url: queryURL,
-          method: "GET",
-        }).then(function (omdbResponse) {
-          displayPosters(omdbResponse, index);
-          displaySimilarMoviesInfo(omdbResponse, index);
-
-        });
-      }
-
-    }
-
-    function displayPosters(omdbResponse) {
-      var newImg = $("<img>");
-
-      newImg.addClass("thumbnail SuggestedFilmImg m-5");
-      newImg.css({ width: "300px", height: "400px" });
-      newImg.attr({
-        src: omdbResponse.Poster,
-        alt: omdbResponse.Title,
-        "data-tooltip": "",
-        tabindex: "2",
-        title: omdbResponse.Title,
-        id: "movieImg" + i,
+    for (var i = 0; i < 4; i++) {
+      var queryURL =
+        "https://www.omdbapi.com/?t=" +
+        tasteDiveResponse.Similar.Results[i].Name +
+        "&apikey=trilogy";
+      $.ajax({
+        url: queryURL,
+        method: "GET",
+      }).then(function (omdbResponse) {
+        displayPosters(omdbResponse, index);
+        displaySimilarMoviesInfo(omdbResponse, index);
 
       });
-
-      $("#filmsTab").append(newImg);
     }
-  });
 
-  function displaySimilarMoviesInfo(omdbResponse, i) {
-  
-   var movieObject = {
-      title: omdbResponse.Title,
-      plot: omdbResponse.Plot,
-      rating: omdbResponse.Rated,
-      year: omdbResponse.Year
-    };
-
-    similarMoviesModals(movieObject, i);
-    ​
   }
-    
 
- function openTab(evt, tabName) {
+  function displayPosters(omdbResponse) {
+    var newImg = $("<img>");
+
+    newImg.addClass("thumbnail SuggestedFilmImg m-5");
+    newImg.css({ width: "300px", height: "400px" });
+    newImg.attr({
+      src: omdbResponse.Poster,
+      alt: omdbResponse.Title,
+      "data-tooltip": "",
+      tabindex: "2",
+      title: omdbResponse.Title,
+      id: "movieImg" + i,
+
+    });
+
+    $("#filmsTab").append(newImg);
+  }
+});
+
+function displaySimilarMoviesInfo(omdbResponse, i) {
+
+  var movieObject = {
+    title: omdbResponse.Title,
+    plot: omdbResponse.Plot,
+    rating: omdbResponse.Rated,
+    year: omdbResponse.Year
+  };
+
+  similarMoviesModals(movieObject, i);
+
+}
+
+//defining the similar modals function
+function similarMoviesModals(obj, i) {
+  // Creating modals when actors images are clicked
+  modalDiv = $("<div>");
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+function openTab(evt, tabName) {
   var i, x, tablinks;
   x = $(".content-tab");
   for (i = 0; i < x.length; i++) {
