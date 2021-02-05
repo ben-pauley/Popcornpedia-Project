@@ -1,15 +1,15 @@
-html, body {
-  width:100%;
-  overflow-x:hidden;}
-​
-#movie-info {
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+​ #movie-info {
   border: 2px solid grey;
   border-radius: 10px;
-};
-​
-img {
+}
+​ img {
   border: 1px solid #ddd; /* Gray border */
-  border-radius: 10px;  /* Rounded border */
+  border-radius: 10px; /* Rounded border */
   padding: 5px; /* Some padding */
   width: 150px; /* Set a small width */
 }
@@ -18,13 +18,10 @@ img {
 img:hover {
   box-shadow: 0 0 4px 2px rgba(0, 140, 186, 0.5);
 }
-​
-.is-horizontal-center {
+​ .is-horizontal-center {
   justify-content: center;
-};
-​
-​
-.card.is-horizontal {
+}
+​ ​ .card.is-horizontal {
   display: flex;
   flex-basis: 50ex;
   flex-grow: 0;
@@ -34,8 +31,7 @@ img:hover {
   flex: 4;
   flex-shrink: 1;
 }
-​
-.card.is-horizontal .card-image .image img {
+​ .card.is-horizontal .card-image .image img {
   height: 100%;
   object-fit: cover;
   object-position: center;
@@ -59,18 +55,17 @@ img:hover {
 }
 .footer {
   padding: 10px;
-  background-color: rgb(69, 67, 67)
-  
+  background-color: rgb(69, 67, 67);
 }
 .footer-text {
   color: white;
   text-align: center;
 }
-​
-@media only screen and (max-width:600px) {
- .recent-search {
-   width: 100px;
-   height: 150px;
+
+@media only screen and (max-width: 600px) {
+  .recent-search {
+    width: 100px;
+    height: 150px;
   }
   .recent-search-col {
     padding: 0px;
@@ -80,7 +75,7 @@ img:hover {
     height: 150px;
   }
   #main-film-synopsis {
-  font-size: 10px;
+    font-size: 10px;
   }
   #main-film-name {
     font-size: 20px;
@@ -97,47 +92,58 @@ img:hover {
     margin: 0px;
     padding: 0px;
   }
-  #actorImg0,#actorImg1, #actorImg2,#actorImg3 {
+  #actorImg0,
+  #actorImg1,
+  #actorImg2,
+  #actorImg3 {
     width: 80px;
     height: 80px;
     margin: 0px;
   }
-  #directorImg0,#directorImg1, #directorImg2,#directorImg3 {
+  #directorImg0,
+  #directorImg1,
+  #directorImg2,
+  #directorImg3 {
     width: 80px;
     height: 80px;
     margin: 0px;
   }
 }
-​
-​
+
 @media only screen and (min-width: 700px) {
   .recent-search {
     width: 300px;
     height: 450px;
-   }
-   
-  #main-film-poster { 
+  }
+
+  #main-film-poster {
     width: 300px;
     height: 450px;
     border-radius: 10px;
     margin: 5px;
-  };
-   .SuggestedFilmImg {
+  }
+  .SuggestedFilmImg {
     width: 300px;
     height: 450px;
     margin: 1.5rem;
-   }
-   .tabs {
+  }
+  .tabs {
     font-size: 1.25rem;
   }
-   #actorImg0,#actorImg1, #actorImg2,#actorImg3 {
+  #actorImg0,
+  #actorImg1,
+  #actorImg2,
+  #actorImg3 {
     width: 200px;
     height: 200px;
     margin: 1.5rem;
   }
-   #directorImg0,#directorImg1, #directorImg2,#directorImg3  {
+  #directorImg0,
+  #directorImg1,
+  #directorImg2,
+  #directorImg3 {
     width: 200px;
     height: 200px;
     margin: 1.5rem;
-   }
- }
+  }
+}
