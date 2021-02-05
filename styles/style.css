@@ -1,3 +1,34 @@
+#logo{
+  max-width:8%;
+
+}
+
+title{
+  font-family: 'Orbitron', sans-serif;
+}
+#midpage-title {
+  font-family: 'Orbitron', sans-serif;
+  line-height:2; 
+  color:white;
+}
+
+#popcorn-pedia1{
+  font-family: 'Orbitron', sans-serif;
+}
+#popcorn-pedia2{
+  font-family: 'Orbitron', sans-serif;
+}
+
+#main-film-poster {
+  width: 200px;
+  border-radius: 10px;
+  margin: 5px;
+}
+#movie-info {
+  border: 2px solid grey;
+  border-radius: 10px;
+};
+
 html,
 body {
   overflow-x: hidden;
@@ -18,10 +49,21 @@ body {
 img:hover {
   box-shadow: 0 0 4px 2px rgba(0, 140, 186, 0.5);
 }
-​ .is-horizontal-center {
-  justify-content: center;
+
+#main-film-poster { 
+  width: 300px;
+  height: 450px;
+
+};
+
+#tabsContent{
+display:none;
 }
-​ ​ .card.is-horizontal {
+.is-horizontal-center {
+  justify-content: center;
+};
+
+.card.is-horizontal {
   display: flex;
   flex-basis: 50ex;
   flex-grow: 0;
@@ -53,6 +95,31 @@ img:hover {
 .hero-background.is-transparent {
   opacity: 0.5;
 }
+.tab-one{
+  color: red;
+  opacity: 70%;
+  font: black; 
+
+}
+.tab-two{
+  color: blue;
+  opacity: 70%;
+  font: black; 
+  
+}
+
+.tab-three{
+  color: rgb(12, 150, 24);
+  opacity: 70%;
+  font: black; 
+  
+}
+
+.tab-one h2 .tab-two h2 .tab-three h2 {
+ font-weight: 300;
+ font-size:16pt;
+}
+
 .footer {
   background-color: rgb(69, 67, 67);
   padding: 10px;

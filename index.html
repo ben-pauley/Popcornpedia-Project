@@ -18,16 +18,19 @@
   <!-- Adding an icon to the title -->
   <link rel="icon" type="image/png" href="assets/logo.png">
   <title>Popcornpedia</title>
+  <!--Google Font link -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <!-- Adding header that holds the navbar -->
   <header>
-    <!-- the nevbar holds the logo the title and the search input and button -->
+    <!-- the navbar holds the logo the title and the search input and button -->
     <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-start">
-        <img src="assets/logo.png" alt="" style="max-width:8%">
-        <h2 class="title is-2 ml-3" style="line-height:2; color:white">Popcornpedia</h2>
+        <img src="assets/logo.png" alt="" id="logo">
+        <h2 class="title is-2 ml-3" id="midpage-title">Popcornpedia</h2>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
@@ -36,7 +39,7 @@
               <input id="movie-input" type="search" placeholder="Search for a movie" class="input is-rounded" size="50">
             </div>
             <div class="control">
-              <button id="add-movie" type="submit" value="Search" class="button is-info is-rounded is-focused">
+              <button id="add-movie" type="submit" value="Search" class="button is-danger is-rounded is-focused">
                 Search
               </button>
             </div>
@@ -52,10 +55,10 @@
     <img alt="Fill Murray" class="hero-background is-transparent" src="./assets/movies.jpeg" />
     <div class="hero-body">
       <div class="container">
-        <h1 class="title is-1">
+        <h1 class="title is-1" id="popcorn-pedia1">
           Popcornpedia
         </h1>
-        <h3 class="subtitle is-2">
+        <h3 class="subtitle is-2" id="popcorn-pedia2">
           Your movie encyclopedia
         </h3>
       </div>

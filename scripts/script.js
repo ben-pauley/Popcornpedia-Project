@@ -2,7 +2,7 @@ $(document).ready(function () {
   renderRecentSearchBtns(retrieveRecentSearches());
 
   $(document).foundation();
-
+//Adding movie searched to local storage.
   $("#add-movie").on("click", function (event) {
     event.preventDefault();
     var movie = storeRecentSearches(retrieveRecentSearches());
@@ -35,8 +35,8 @@ $(document).ready(function () {
       return [];
     }
     return storedSearches;
-  }
-
+  } 
+ 
   function renderRecentSearchBtns(recentSearches) {
     $("#recent-search-btns").empty();
     for (var i = 0; i < 3; i++) {
@@ -55,7 +55,6 @@ $(document).ready(function () {
         newDiv.addClass("column is-flex is-justify-content-center");
         newImg.addClass("thumbnail recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
-        newImg.css({ width: "300px", height: "450px" });
         $("#recent-search-btns").append(newDiv);
         newDiv.append(newImg);
       });
@@ -128,8 +127,8 @@ $(document).ready(function () {
   function setActorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail m-5");
-    newImg.css({ width: "200px", height: "200px" });
+    newImg.addClass("thumbnail");
+   
     newImg.attr({
       id: "actorImg" + i,
       src: imdbResponse.names[0].image,
@@ -171,7 +170,7 @@ $(document).ready(function () {
     var occupation = celebNinjasResponse[0].occupation;
     // Creating modals when actors images are clicked
     modalDiv = $("<div>");
-    modalDiv.addClass("small reveal");
+    modalDiv.addClass("tab-one small reveal");
     modalDiv.attr({ "data-reveal": "", id: "actorInfo0" + i });
     $("#actorImg" + i).attr("data-open", "actorInfo0" + i);
     modalDiv.append("<h2 id=actorName></h2>");
@@ -233,8 +232,7 @@ $(document).ready(function () {
   function setDirectorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail m-5");
-    newImg.css({ width: "200px", height: "200px" });
+    newImg.addClass("thumbnail");
     newImg.attr({
       id: "directorImg" + i,
       src: imdbResponse.names[0].image,
@@ -276,7 +274,7 @@ $(document).ready(function () {
     var occupation = celebNinjasResponse[0].occupation;
 
     modalDiv = $("<div>");
-    modalDiv.addClass("small reveal");
+    modalDiv.addClass("tab-two small reveal");
     modalDiv.attr({ "data-reveal": "", id: "directorInfo0" + i });
     $("#directorImg" + i).attr("data-open", "directorInfo0" + i);
     modalDiv.append("<h2 id=directorName></h2>");
@@ -286,6 +284,7 @@ $(document).ready(function () {
     );
     $("#crewTab").append(modalDiv);
     $("#directorName").text(name);
+    $("directorName").addClass("modal-title") 
     $("#directorInfo").html(
       "<b>Age: </b>" +
         age +
@@ -301,7 +300,11 @@ $(document).ready(function () {
     );
   }
 
+
   function renderSimilarMoviesTab(movie) {
+    $("#filmsTab").empty();
+
+
     $.ajax({
       type: "GET",
       url: "https://tastedive.com/api/similar?limit=4",
@@ -314,15 +317,19 @@ $(document).ready(function () {
       },
 
       success: function (tasteDiveResponse) {
-        fetchPosters(tasteDiveResponse);
+
+        for (var i = 0; i < 4; i++) {
+
+          fetchPosters(tasteDiveResponse, i);
+        }
       },
     });
+
+  
   }
-
-  function fetchPosters(tasteDiveResponse) {
-    $("#filmsTab").empty();
-
-    for (var i = 0; i < 4; i++) {
+  function fetchPosters(tasteDiveResponse,i) {
+      const index = i;
+  
       var queryURL =
         "https://www.omdbapi.com/?t=" +
         tasteDiveResponse.Similar.Results[i].Name +
@@ -331,25 +338,69 @@ $(document).ready(function () {
         url: queryURL,
         method: "GET",
       }).then(function (omdbResponse) {
-        displayPosters(omdbResponse);
+        displayPosters(omdbResponse, index);
+        displaySimilarMoviesInfo(omdbResponse, index);
+
       });
-    }
+    
   }
 
-  function displayPosters(omdbResponse) {
+function displayPosters(omdbResponse,i) {
+    $(document).foundation();
+    
     var newImg = $("<img>");
 
-    newImg.addClass("thumbnail SuggestedFilmImg m-5");
-    newImg.css({ width: "300px", height: "400px" });
+    newImg.addClass("thumbnail SuggestedFilmImg");
     newImg.attr({
       src: omdbResponse.Poster,
       alt: omdbResponse.Title,
       "data-tooltip": "",
       tabindex: "2",
       title: omdbResponse.Title,
-    });
+      id: "movieImg" + i,
 
+    });
     $("#filmsTab").append(newImg);
+}
+
+function displaySimilarMoviesInfo(omdbResponse, i) {
+
+  var movieObject = {
+    title: omdbResponse.Title,
+    plot: omdbResponse.Plot,
+    rating: omdbResponse.Rated,
+    year: omdbResponse.Year
+  };
+
+  similarMoviesModals(movieObject, i);
+}
+
+//defining the similar modals function
+function similarMoviesModals(obj, i) {
+  // Creating modals when actors images are clicked
+  modalDiv = $("<div>");
+  modalDiv.addClass("tab-three small reveal");
+  modalDiv.attr({ "data-reveal": "", id: "movieInfo0" + i });
+    $("#movieImg"+i).attr("data-open", "movieInfo0" + i);
+    modalDiv.append("<h2 id=movieName></h2>");
+    modalDiv.append("<div id=movieInfo></div>");
+    modalDiv.append(
+      "<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>");
+
+      $("#filmsTab").append(modalDiv);
+      $("#movieName").text(obj.title);
+      $("#movieInfo").html(
+        "<b>Year: </b>" +
+        obj.year +
+        "<br>" +
+        "<b>Rating : <b/>" +
+        obj.rating +
+        "<br>" +
+        "<b>Plot : </b>" +
+        obj.plot);
+  }  
+      
+});    
   }
 
   function nyTimes(movie) {
