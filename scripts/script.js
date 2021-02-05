@@ -72,6 +72,7 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET",
     }).then(function (omdbResponse) {
+      $(".hero").css("display", "none");
       renderMainMovie(omdbResponse, movie);
       renderActorsTab(omdbResponse);
       renderCrewTab(omdbResponse);

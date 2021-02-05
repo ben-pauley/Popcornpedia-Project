@@ -40,22 +40,22 @@ img:hover {
   flex: 3;
 }
 .hero.has-background {
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 .hero-background {
-  position: absolute;
+  height: 100%;
   object-fit: cover;
   object-position: center center;
+  position: absolute;
   width: 100%;
-  height: 100%;
 }
 .hero-background.is-transparent {
   opacity: 0.5;
 }
 .footer {
-  padding: 10px;
   background-color: rgb(69, 67, 67);
+  padding: 10px;
 }
 .footer-text {
   color: white;
@@ -64,15 +64,15 @@ img:hover {
 
 @media only screen and (max-width: 600px) {
   .recent-search {
-    width: 100px;
     height: 150px;
+    width: 100px;
   }
   .recent-search-col {
     padding: 0px;
   }
   #main-film-poster {
-    width: 100px;
     height: 150px;
+    width: 100px;
   }
   #main-film-synopsis {
     font-size: 10px;
@@ -81,9 +81,9 @@ img:hover {
     font-size: 20px;
   }
   .SuggestedFilmImg {
-    width: 100px;
     height: 150px;
     margin: 0px;
+    width: 100px;
   }
   .tabs {
     font-size: 0.75rem;
@@ -96,36 +96,36 @@ img:hover {
   #actorImg1,
   #actorImg2,
   #actorImg3 {
-    width: 80px;
     height: 80px;
     margin: 0px;
+    width: 80px;
   }
   #directorImg0,
   #directorImg1,
   #directorImg2,
   #directorImg3 {
-    width: 80px;
     height: 80px;
     margin: 0px;
+    width: 80px;
   }
 }
 
 @media only screen and (min-width: 700px) {
   .recent-search {
-    width: 300px;
     height: 450px;
+    width: 300px;
   }
 
   #main-film-poster {
-    width: 300px;
-    height: 450px;
     border-radius: 10px;
+    height: 450px;
     margin: 5px;
+    width: 300px;
   }
   .SuggestedFilmImg {
-    width: 300px;
     height: 450px;
     margin: 1.5rem;
+    width: 300px;
   }
   .tabs {
     font-size: 1.25rem;
@@ -134,16 +134,16 @@ img:hover {
   #actorImg1,
   #actorImg2,
   #actorImg3 {
-    width: 200px;
     height: 200px;
     margin: 1.5rem;
+    width: 200px;
   }
   #directorImg0,
   #directorImg1,
   #directorImg2,
   #directorImg3 {
-    width: 200px;
     height: 200px;
     margin: 1.5rem;
+    width: 200px;
   }
 }
