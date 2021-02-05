@@ -302,11 +302,11 @@ $(document).ready(function () {
       occupation
     );
   }
-  
+
   function renderSimilarMoviesTab(movie) {
     $("#filmsTab").empty();
     // $(".reveal-overlay").empty();
-​
+
     $.ajax({
       type: "GET",
       url: "https://tastedive.com/api/similar?limit=4",
@@ -317,57 +317,67 @@ $(document).ready(function () {
         q: movie,
         k: "400900-Popcornp-N9NY6GRY",
       },
-​
+
       success: function (tasteDiveResponse) {
-      
+
         for (var i = 0; i < 4; i++) {
-​
+
           fetchPosters(tasteDiveResponse, i);
         }
       },
     });
 
-  function fetchPosters(tasteDiveResponse) {
-    $("#filmsTab").empty();
+  }
 
-    for (var i = 0; i < 4; i++) {
-      var queryURL =
-        "https://www.omdbapi.com/?t=" +
-        tasteDiveResponse.Similar.Results[i].Name +
-        "&apikey=trilogy";
-      $.ajax({
-        url: queryURL,
-        method: "GET",
-      }).then(function (omdbResponse) {
-        displayPosters(omdbResponse, index);
-        displaySimilarMoviesInfo(omdbResponse, index);
-        
-      });
+    function fetchPosters(tasteDiveResponse) {
+      $("#filmsTab").empty();
+
+      for (var i = 0; i < 4; i++) {
+        var queryURL =
+          "https://www.omdbapi.com/?t=" +
+          tasteDiveResponse.Similar.Results[i].Name +
+          "&apikey=trilogy";
+        $.ajax({
+          url: queryURL,
+          method: "GET",
+        }).then(function (omdbResponse) {
+          displayPosters(omdbResponse, index);
+          displaySimilarMoviesInfo(omdbResponse, index);
+
+        });
+      }
+
     }
-  
+
+    function displayPosters(omdbResponse) {
+      var newImg = $("<img>");
+
+      newImg.addClass("thumbnail SuggestedFilmImg m-5");
+      newImg.css({ width: "300px", height: "400px" });
+      newImg.attr({
+        src: omdbResponse.Poster,
+        alt: omdbResponse.Title,
+        "data-tooltip": "",
+        tabindex: "2",
+        title: omdbResponse.Title,
+        id: "movieImg" + i,
+
+      });
+
+      $("#filmsTab").append(newImg);
+    }
+  });
+
+  function displaySimilarMoviesInfo(omdbResponse, i) {
   }
 
-  function displayPosters(omdbResponse) {
-    var newImg = $("<img>");
-
-    newImg.addClass("thumbnail SuggestedFilmImg m-5");
-    newImg.css({ width: "300px", height: "400px" });
-    newImg.attr({
-      src: omdbResponse.Poster,
-      alt: omdbResponse.Title,
-      "data-tooltip": "",
-      tabindex: "2",
-      title: omdbResponse.Title,
-      id: "movieImg" + i,
-      
-    });
-
-    $("#filmsTab").append(newImg);
-  }
-});
 
 
-function openTab(evt, tabName) {
+
+
+
+
+ function openTab(evt, tabName) {
   var i, x, tablinks;
   x = $(".content-tab");
   for (i = 0; i < x.length; i++) {
