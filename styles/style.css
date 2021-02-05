@@ -58,3 +58,27 @@ img:hover {
 .hero-background.is-transparent {
   opacity: 0.5;
 }
+
+@media only screen and (max-width:600px) {
+  .recent-search {
+    width: 100px;
+    height: 150px;
+   }
+   .recent-search-col {
+     padding: 0px;
+   }
+   #main-film-poster {
+     width: 100px;
+     height: 150px;
+   }
+   #main-film-synopsis {
+   font-size: 10px;
+   }
+   #main-film-name {
+     font-size: 20px;
+   }
+   .SuggestedFilmImg {
+     width: 100px;
+     height: 150px;
+     margin: 0px;
+   }
