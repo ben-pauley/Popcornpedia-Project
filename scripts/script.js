@@ -11,7 +11,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", ".recent-search", getMovieClicked);
- //calling the getmovie clicked function, this retrieves info from storage.
+
   function getMovieClicked() {
     getMovieDetails($(this).attr("alt"));
   }
@@ -286,7 +286,7 @@ $(document).ready(function () {
     );
     $("#crewTab").append(modalDiv);
     $("#directorName").text(name);
-    $("directorName").addClass("modal-title") //
+    $("directorName").addClass("modal-title") 
     $("#directorInfo").html(
       "<b>Age: </b>" +
       age +
@@ -302,9 +302,10 @@ $(document).ready(function () {
     );
   }
 
+
   function renderSimilarMoviesTab(movie) {
     $("#filmsTab").empty();
-    // $(".reveal-overlay").empty();
+
 
     $.ajax({
       type: "GET",
@@ -326,12 +327,11 @@ $(document).ready(function () {
       },
     });
 
+  
   }
-
-  function fetchPosters(tasteDiveResponse) {
-    $("#filmsTab").empty();
-
-    for (var i = 0; i < 4; i++) {
+  function fetchPosters(tasteDiveResponse,i) {
+      const index = i;
+  
       var queryURL =
         "https://www.omdbapi.com/?t=" +
         tasteDiveResponse.Similar.Results[i].Name +
@@ -344,15 +344,15 @@ $(document).ready(function () {
         displaySimilarMoviesInfo(omdbResponse, index);
 
       });
-    }
-
+    
   }
 
-  function displayPosters(omdbResponse) {
+function displayPosters(omdbResponse,i) {
+    $(document).foundation();
+    
     var newImg = $("<img>");
 
     newImg.addClass("thumbnail SuggestedFilmImg");
-    newImg.css({ width: "300px", height: "400px" });
     newImg.attr({
       src: omdbResponse.Poster,
       alt: omdbResponse.Title,
@@ -362,10 +362,9 @@ $(document).ready(function () {
       id: "movieImg" + i,
 
     });
-
     $("#filmsTab").append(newImg);
-  }
-});
+  
+}
 
 function displaySimilarMoviesInfo(omdbResponse, i) {
 
@@ -404,8 +403,7 @@ function similarMoviesModals(obj, i) {
         obj.plot);
   }  
       
-;    
-
+});    
 
 function openTab(evt, tabName) {
   var i, x, tablinks;
@@ -420,5 +418,4 @@ function openTab(evt, tabName) {
   document.getElementById(tabName).style = "";
   evt.currentTarget.className += " is-active";
 
-};
-
+}

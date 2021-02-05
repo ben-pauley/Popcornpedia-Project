@@ -96,7 +96,7 @@ display:none;
 
 }
 .tab-two{
-  color: lightblue;
+  color: blue;
   opacity: 70%;
   font: black; 
   
@@ -111,5 +111,6 @@ display:none;
 
 .tab-one h2 .tab-two h2 .tab-three h2 {
  font-weight: 300;
+ font-size:16pt;
 }
 
