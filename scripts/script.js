@@ -385,6 +385,7 @@ function displaySimilarMoviesInfo(omdbResponse, i) {
 function similarMoviesModals(obj, i) {
   // Creating modals when actors images are clicked
   modalDiv = $("<div>");
+  modalDiv.addClass("small reveal");
 
 
 
