@@ -82,3 +82,23 @@ img:hover {
      height: 150px;
      margin: 0px;
    }
+
+  .tabs {
+    font-size: 0.75rem;
+  }
+  #tabsContent {
+    margin: 0px;
+    padding: 0px;
+  }
+  #actorImg0,#actorImg1, #actorImg2,#actorImg3 {
+    width: 80px;
+    height: 80px;
+    margin: 0px;
+  }
+  #directorImg0,#directorImg1, #directorImg2,#directorImg3 {
+    width: 80px;
+    height: 80px;
+    margin: 0px;
+  }
+}
+​
