@@ -2,7 +2,7 @@ $(document).ready(function () {
   renderRecentSearchBtns(retrieveRecentSearches());
 
   $(document).foundation();
-
+//Adding movie searched to local storage.
   $("#add-movie").on("click", function (event) {
     event.preventDefault();
     var movie = storeRecentSearches(retrieveRecentSearches());
@@ -11,7 +11,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", ".recent-search", getMovieClicked);
-
+ //calling the getmovie clicked function, this retrieves info from storage.
   function getMovieClicked() {
     getMovieDetails($(this).attr("alt"));
   }
@@ -35,8 +35,8 @@ $(document).ready(function () {
       return [];
     }
     return storedSearches;
-  }
-
+  } 
+ 
   function renderRecentSearchBtns(recentSearches) {
     $("#recent-search-btns").empty();
     for (var i = 0; i < 3; i++) {
@@ -171,7 +171,7 @@ $(document).ready(function () {
     var occupation = celebNinjasResponse[0].occupation;
     // Creating modals when actors images are clicked
     modalDiv = $("<div>");
-    modalDiv.addClass("small reveal");
+    modalDiv.addClass("tab-one small reveal");
     modalDiv.attr({ "data-reveal": "", id: "actorInfo0" + i });
     $("#actorImg" + i).attr("data-open", "actorInfo0" + i);
     modalDiv.append("<h2 id=actorName></h2>");
@@ -276,7 +276,7 @@ $(document).ready(function () {
     var occupation = celebNinjasResponse[0].occupation;
 
     modalDiv = $("<div>");
-    modalDiv.addClass("small reveal");
+    modalDiv.addClass("tab-two small reveal");
     modalDiv.attr({ "data-reveal": "", id: "directorInfo0" + i });
     $("#directorImg" + i).attr("data-open", "directorInfo0" + i);
     modalDiv.append("<h2 id=directorName></h2>");
@@ -286,6 +286,7 @@ $(document).ready(function () {
     );
     $("#crewTab").append(modalDiv);
     $("#directorName").text(name);
+    $("directorName").addClass("modal-title") //
     $("#directorInfo").html(
       "<b>Age: </b>" +
       age +
@@ -382,7 +383,7 @@ function displaySimilarMoviesInfo(omdbResponse, i) {
 function similarMoviesModals(obj, i) {
   // Creating modals when actors images are clicked
   modalDiv = $("<div>");
-  modalDiv.addClass("small reveal");
+  modalDiv.addClass("tab-three small reveal");
   modalDiv.attr({ "data-reveal": "", id: "movieInfo0" + i });
     $("#movieImg"+i).attr("data-open", "movieInfo0" + i);
     modalDiv.append("<h2 id=movieName></h2>");
@@ -404,7 +405,6 @@ function similarMoviesModals(obj, i) {
   }  
       
 ;    
-
 
 
 function openTab(evt, tabName) {

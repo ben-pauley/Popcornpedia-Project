@@ -88,3 +88,28 @@ display:none;
 .hero-background.is-transparent {
   opacity: 0.5;
 }
+
+.tab-one{
+  color: red;
+  opacity: 70%;
+  font: black; 
+
+}
+.tab-two{
+  color: lightblue;
+  opacity: 70%;
+  font: black; 
+  
+}
+
+.tab-three{
+  color: lime;
+  opacity: 70%;
+  font: black; 
+  
+}
+
+.tab-one h2 .tab-two h2 .tab-three h2 {
+ font-weight: 300;
+}
+
