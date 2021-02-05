@@ -6,3 +6,20 @@ html, body {
   border: 2px solid grey;
   border-radius: 10px;
 };
+
+​
+img {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 10px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 150px; /* Set a small width */
+}
+​
+/* Add a hover effect (blue shadow) */
+img:hover {
+  box-shadow: 0 0 4px 2px rgba(0, 140, 186, 0.5);
+}
+​
+.is-horizontal-center {
+  justify-content: center;
+};
