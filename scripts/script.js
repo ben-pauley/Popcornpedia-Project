@@ -339,9 +339,12 @@ $(document).ready(function () {
         url: queryURL,
         method: "GET",
       }).then(function (omdbResponse) {
-        displayPosters(omdbResponse);
+        displayPosters(omdbResponse, index);
+        displaySimilarMoviesInfo(omdbResponse, index);
+        
       });
     }
+  
   }
 
   function displayPosters(omdbResponse) {
