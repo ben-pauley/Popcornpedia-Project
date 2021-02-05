@@ -2,7 +2,7 @@ $(document).ready(function () {
   renderRecentSearchBtns(retrieveRecentSearches());
 
   $(document).foundation();
-//Adding movie searched to local storage.
+  //Adding movie searched to local storage.
   $("#add-movie").on("click", function (event) {
     event.preventDefault();
     var movie = storeRecentSearches(retrieveRecentSearches());
@@ -35,8 +35,8 @@ $(document).ready(function () {
       return [];
     }
     return storedSearches;
-  } 
- 
+  }
+
   function renderRecentSearchBtns(recentSearches) {
     $("#recent-search-btns").empty();
     for (var i = 0; i < 3; i++) {
@@ -128,7 +128,7 @@ $(document).ready(function () {
     var newImg = $("<img>");
 
     newImg.addClass("thumbnail");
-   
+
     newImg.attr({
       id: "actorImg" + i,
       src: imdbResponse.names[0].image,
@@ -284,7 +284,7 @@ $(document).ready(function () {
     );
     $("#crewTab").append(modalDiv);
     $("#directorName").text(name);
-    $("directorName").addClass("modal-title") 
+    $("directorName").addClass("modal-title");
     $("#directorInfo").html(
       "<b>Age: </b>" +
         age +
@@ -300,10 +300,8 @@ $(document).ready(function () {
     );
   }
 
-
   function renderSimilarMoviesTab(movie) {
     $("#filmsTab").empty();
-
 
     $.ajax({
       type: "GET",
@@ -317,37 +315,32 @@ $(document).ready(function () {
       },
 
       success: function (tasteDiveResponse) {
-
         for (var i = 0; i < 4; i++) {
-
           fetchPosters(tasteDiveResponse, i);
         }
       },
     });
-
-  
-  }
-  function fetchPosters(tasteDiveResponse,i) {
-      const index = i;
-  
-      var queryURL =
-        "https://www.omdbapi.com/?t=" +
-        tasteDiveResponse.Similar.Results[i].Name +
-        "&apikey=trilogy";
-      $.ajax({
-        url: queryURL,
-        method: "GET",
-      }).then(function (omdbResponse) {
-        displayPosters(omdbResponse, index);
-        displaySimilarMoviesInfo(omdbResponse, index);
-
-      });
-    
   }
 
-function displayPosters(omdbResponse,i) {
+  function fetchPosters(tasteDiveResponse, i) {
+    const index = i;
+
+    var queryURL =
+      "https://www.omdbapi.com/?t=" +
+      tasteDiveResponse.Similar.Results[i].Name +
+      "&apikey=trilogy";
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+    }).then(function (omdbResponse) {
+      displayPosters(omdbResponse, index);
+      displaySimilarMoviesInfo(omdbResponse, index);
+    });
+  }
+
+  function displayPosters(omdbResponse, i) {
     $(document).foundation();
-    
+
     var newImg = $("<img>");
 
     newImg.addClass("thumbnail SuggestedFilmImg");
@@ -358,49 +351,46 @@ function displayPosters(omdbResponse,i) {
       tabindex: "2",
       title: omdbResponse.Title,
       id: "movieImg" + i,
-
     });
     $("#filmsTab").append(newImg);
-}
+  }
 
-function displaySimilarMoviesInfo(omdbResponse, i) {
+  function displaySimilarMoviesInfo(omdbResponse, i) {
+    var movieObject = {
+      title: omdbResponse.Title,
+      plot: omdbResponse.Plot,
+      rating: omdbResponse.Rated,
+      year: omdbResponse.Year,
+    };
 
-  var movieObject = {
-    title: omdbResponse.Title,
-    plot: omdbResponse.Plot,
-    rating: omdbResponse.Rated,
-    year: omdbResponse.Year
-  };
+    similarMoviesModals(movieObject, i);
+  }
 
-  similarMoviesModals(movieObject, i);
-}
-
-//defining the similar modals function
-function similarMoviesModals(obj, i) {
-  // Creating modals when actors images are clicked
-  modalDiv = $("<div>");
-  modalDiv.addClass("tab-three small reveal");
-  modalDiv.attr({ "data-reveal": "", id: "movieInfo0" + i });
-    $("#movieImg"+i).attr("data-open", "movieInfo0" + i);
+  //defining the similar modals function
+  function similarMoviesModals(obj, i) {
+    // Creating modals when actors images are clicked
+    modalDiv = $("<div>");
+    modalDiv.addClass("tab-three small reveal");
+    modalDiv.attr({ "data-reveal": "", id: "movieInfo0" + i });
+    $("#movieImg" + i).attr("data-open", "movieInfo0" + i);
     modalDiv.append("<h2 id=movieName></h2>");
     modalDiv.append("<div id=movieInfo></div>");
     modalDiv.append(
-      "<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>");
+      "<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>"
+    );
 
-      $("#filmsTab").append(modalDiv);
-      $("#movieName").text(obj.title);
-      $("#movieInfo").html(
-        "<b>Year: </b>" +
+    $("#filmsTab").append(modalDiv);
+    $("#movieName").text(obj.title);
+    $("#movieInfo").html(
+      "<b>Year: </b>" +
         obj.year +
         "<br>" +
         "<b>Rating : <b/>" +
         obj.rating +
         "<br>" +
         "<b>Plot : </b>" +
-        obj.plot);
-  }  
-      
-});    
+        obj.plot
+    );
   }
 
   function nyTimes(movie) {
@@ -425,18 +415,18 @@ function similarMoviesModals(obj, i) {
         throw err;
       });
   }
-});
 
-function openTab(evt, tabName) {
-  var i, x, tablinks;
-  x = $(".content-tab");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none ";
+  function openTab(evt, tabName) {
+    var i, x, tablinks;
+    x = $(".content-tab");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none ";
+    }
+    tablinks = $(".tab");
+    for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace("is-active", "");
+    }
+    document.getElementById(tabName).style = "";
+    evt.currentTarget.className += " is-active";
   }
-  tablinks = $(".tab");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace("is-active", "");
-  }
-  document.getElementById(tabName).style = "";
-  evt.currentTarget.className += " is-active";
-}
+});
