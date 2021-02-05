@@ -377,11 +377,10 @@ $(document).ready(function () {
       year: omdbResponse.Year
     };
 
-
-
-
-
-
+    similarMoviesModals(movieObject, i);
+    ​
+  }
+    
 
  function openTab(evt, tabName) {
   var i, x, tablinks;
