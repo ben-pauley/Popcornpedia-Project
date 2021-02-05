@@ -6,7 +6,6 @@ html, body {
   border: 2px solid grey;
   border-radius: 10px;
 };
-
 ​
 img {
   border: 1px solid #ddd; /* Gray border */
@@ -23,7 +22,8 @@ img:hover {
 .is-horizontal-center {
   justify-content: center;
 };
-
+​
+​
 .card.is-horizontal {
   display: flex;
   flex-basis: 50ex;
@@ -43,7 +43,6 @@ img:hover {
 .card.is-horizontal .card-content {
   flex: 3;
 }
-
 .hero.has-background {
   position: relative;
   overflow: hidden;
@@ -58,31 +57,30 @@ img:hover {
 .hero-background.is-transparent {
   opacity: 0.5;
 }
-
+​
 @media only screen and (max-width:600px) {
-  .recent-search {
+ .recent-search {
+   width: 100px;
+   height: 150px;
+  }
+  .recent-search-col {
+    padding: 0px;
+  }
+  #main-film-poster {
     width: 100px;
     height: 150px;
-   }
-   .recent-search-col {
-     padding: 0px;
-   }
-   #main-film-poster {
-     width: 100px;
-     height: 150px;
-   }
-   #main-film-synopsis {
-   font-size: 10px;
-   }
-   #main-film-name {
-     font-size: 20px;
-   }
-   .SuggestedFilmImg {
-     width: 100px;
-     height: 150px;
-     margin: 0px;
-   }
-
+  }
+  #main-film-synopsis {
+  font-size: 10px;
+  }
+  #main-film-name {
+    font-size: 20px;
+  }
+  .SuggestedFilmImg {
+    width: 100px;
+    height: 150px;
+    margin: 0px;
+  }
   .tabs {
     font-size: 0.75rem;
   }
@@ -101,7 +99,9 @@ img:hover {
     margin: 0px;
   }
 }
-​@media only screen and (min-width: 700px) {
+​
+​
+@media only screen and (min-width: 700px) {
   .recent-search {
     width: 300px;
     height: 450px;
