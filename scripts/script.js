@@ -386,7 +386,13 @@ function similarMoviesModals(obj, i) {
   // Creating modals when actors images are clicked
   modalDiv = $("<div>");
   modalDiv.addClass("small reveal");
-
+  modalDiv.attr({ "data-reveal": "", id: "movieInfo0" + i });
+    $("#movieImg"+i).attr("data-open", "movieInfo0" + i);
+    modalDiv.append("<h2 id=movieName></h2>");
+    modalDiv.append("<div id=movieInfo></div>");
+    modalDiv.append(
+      "<button class=close-button data-close aria-label=Close modal type=button><span aria-hidden=true>&times;</span></button>"
+      );
 
 
 
