@@ -3,9 +3,19 @@
 
 }
 
+title{
+  font-family: 'Orbitron', sans-serif;
+}
 #midpage-title {
+  font-family: 'Orbitron', sans-serif;
   line-height:2; 
   color:white;
+}
+
+#popcorn-pedia1{
+  font-family: 'Orbitron', sans-serif;
+}
+#popcorn-pedia2{
   font-family: 'Orbitron', sans-serif;
 }
 
@@ -44,7 +54,6 @@ display:none;
 .is-horizontal-center {
   justify-content: center;
 };
-
 
 .card.is-horizontal {
   display: flex;
