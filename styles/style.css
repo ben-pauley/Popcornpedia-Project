@@ -101,4 +101,34 @@ img:hover {
     margin: 0px;
   }
 }
-​
+​@media only screen and (min-width: 700px) {
+  .recent-search {
+    width: 300px;
+    height: 450px;
+   }
+   
+  #main-film-poster { 
+    width: 300px;
+    height: 450px;
+    border-radius: 10px;
+    margin: 5px;
+  };
+   .SuggestedFilmImg {
+    width: 300px;
+    height: 450px;
+    margin: 1.5rem;
+   }
+   .tabs {
+    font-size: 1.25rem;
+  }
+   #actorImg0,#actorImg1, #actorImg2,#actorImg3 {
+    width: 200px;
+    height: 200px;
+    margin: 1.5rem;
+  }
+   #directorImg0,#directorImg1, #directorImg2,#directorImg3  {
+    width: 200px;
+    height: 200px;
+    margin: 1.5rem;
+   }
+ }
