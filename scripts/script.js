@@ -149,7 +149,7 @@ $(document).ready(function () {
   }
 
   function fetchActorInfo(name, i) {
-    var apiKey = "OXs37W7S5QcenGqKB1COIMhZ7KybW7p6exHAYP7H";
+    var apiKey = "p6kP6K7xyLCFYh3x50LLl2XYe18coWcUYE2hgrqg";
     var queryURL =
       "https://api.celebrityninjas.com/v1/search?limit=1&name=" + name;
     $.ajax({
@@ -254,7 +254,7 @@ $(document).ready(function () {
   }
 
   function fetchDirectorInfo(name, i) {
-    var apiKey = "OXs37W7S5QcenGqKB1COIMhZ7KybW7p6exHAYP7H";
+    var apiKey = "p6kP6K7xyLCFYh3x50LLl2XYe18coWcUYE2hgrqg";
     var queryURL =
       "https://api.celebrityninjas.com/v1/search?limit=1&name=" + name;
     $.ajax({
