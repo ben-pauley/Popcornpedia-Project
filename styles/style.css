@@ -4,8 +4,9 @@ body {
   width: 100%;
 }
 
-#logo {
-  max-width: 8%;
+#pp-logo {
+  width: fit-content;
+  height: auto;
 }
 title {
   font-family: "Orbitron", sans-serif;
