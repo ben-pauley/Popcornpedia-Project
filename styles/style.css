@@ -91,7 +91,9 @@ img:hover {
   opacity: 70%;
   font: black;
 }
-#actorName, #directorName, #movieName {
+#actorName,
+#directorName,
+#movieName {
   font-weight: 300;
   font-size: 16pt;
 }
@@ -128,6 +130,7 @@ img:hover {
   .SuggestedFilmImg {
     height: 150px;
     margin: 0px;
+    margin-bottom: 25px;
     width: 100px;
   }
   .tabs {

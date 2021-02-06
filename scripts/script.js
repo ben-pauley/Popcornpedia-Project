@@ -387,11 +387,9 @@ $(document).ready(function () {
     $("#movieName").text(obj.title);
     $("#movieName").wrap("<a id='getRecMovie' data-close></a>");
     $("#getRecMovie").click(function () {
-      $(".tabs").css("display", "");
-      $("#tabsContent").css("display", "");
-      $("#recent-search-btns").css("display", "");
       getMovieDetails(obj.title);
     });
+
     $("#movieInfo").html(
       "<b>Year: </b>" +
         obj.year +
