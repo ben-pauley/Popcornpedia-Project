@@ -418,17 +418,18 @@ $(document).ready(function () {
       });
   }
 
-  function openTab(evt, tabName) {
-    var i, x, tablinks;
-    x = $(".content-tab");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none ";
-    }
-    tablinks = $(".tab");
-    for (i = 0; i < x.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace("is-active", "");
-    }
-    document.getElementById(tabName).style = "";
-    evt.currentTarget.className += " is-active";
-  }
 });
+
+function openTab(evt, tabName) {
+  var i, x, tablinks;
+  x = $(".content-tab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none ";
+  }
+  tablinks = $(".tab");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace("is-active", "");
+  }
+  document.getElementById(tabName).style = "";
+  evt.currentTarget.className += " is-active";
+}
