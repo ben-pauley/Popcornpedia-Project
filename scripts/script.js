@@ -1,19 +1,20 @@
 $(document).ready(function () {
-  renderRecentSearchBtns(retrieveRecentSearches());
+  renderRecentSearchBtns(retrieveRecentSearches()); // if searches have been made previously, they are loaded with the page
 
   $(document).foundation();
-  //Adding movie searched to local storage.
+
   $("#add-movie").on("click", function (event) {
+    // when text is submitted in search form
     event.preventDefault();
-    var movie = storeRecentSearches(retrieveRecentSearches());
-    renderRecentSearchBtns(retrieveRecentSearches());
+    var movie = storeRecentSearches(retrieveRecentSearches()); // new search is stored
+    renderRecentSearchBtns(retrieveRecentSearches()); // search history is loaded with new search
     getMovieDetails(movie);
   });
 
-  $(document).on("click", ".recent-search", getMovieClicked);
+  $(document).on("click", ".recent-search", getMovieClicked); // when movie in search history is clicked
 
   function getMovieClicked() {
-    getMovieDetails($(this).attr("alt"));
+    getMovieDetails($(this).attr("alt")); // movie details are shown for clicked movie
   }
 
   function storeRecentSearches(recentSearches) {
@@ -32,7 +33,7 @@ $(document).ready(function () {
   function retrieveRecentSearches() {
     var storedSearches = JSON.parse(localStorage.getItem("recentSearches"));
     if (storedSearches === null) {
-      return [];
+      return []; // return empty array if no previous searches have been made
     }
     return storedSearches;
   }
@@ -52,9 +53,11 @@ $(document).ready(function () {
       }).then(function (response) {
         var newImg = $("<img>");
         var newDiv = $("<div>");
+
         newDiv.addClass("column is-flex is-justify-content-center");
         newImg.addClass("thumbnail recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
+
         $("#recent-search-btns").append(newDiv);
         newDiv.append(newImg);
       });
@@ -81,22 +84,24 @@ $(document).ready(function () {
 
   function renderMainMovie(omdbResponse, movie) {
     $("#body-container").css("display", "block");
+
     $("#main-film-poster").attr("src", omdbResponse.Poster);
     $("#main-film-name").text(
       omdbResponse.Title + " (" + omdbResponse.Year + ")"
     );
     $("#main-film-synopsis").text(omdbResponse.Plot);
+
     nyTimes(movie);
   }
 
   function renderActorsTab(omdbResponse) {
     $("#actorsTab").empty();
-    // Remove modals content
-    $(".reveal-overlay").empty();
-    // Converting actor string into array
-    var actorArray = omdbResponse.Actors.split(",");
-    // For loop that create actors images and their related infomation
+    $(".reveal-overlay").empty(); // Remove modals content
+
+    var actorArray = omdbResponse.Actors.split(","); // Converting actor string into array
+
     for (var i = 0; i < actorArray.length; i++) {
+      // Create actor images and related information
       var actorName = actorArray[i].trim();
       fetchActorImg(actorName, i);
       fetchActorInfo(actorName, i);
@@ -168,6 +173,7 @@ $(document).ready(function () {
     var birthday = celebNinjasResponse[0].birthday;
     var nationality = celebNinjasResponse[0].nationality;
     var occupation = celebNinjasResponse[0].occupation;
+
     // Creating modals when actors images are clicked
     modalDiv = $("<div>");
     modalDiv.addClass("tab-one small reveal");
@@ -366,9 +372,7 @@ $(document).ready(function () {
     similarMoviesModals(movieObject, i);
   }
 
-  //defining the similar modals function
   function similarMoviesModals(obj, i) {
-    // Creating modals when actors images are clicked
     modalDiv = $("<div>");
     modalDiv.addClass("tab-three small reveal");
     modalDiv.attr({ "data-reveal": "", id: "movieInfo0" + i });
@@ -401,12 +405,10 @@ $(document).ready(function () {
         "api-key": "yZy7D7qdolnKnRDtSuRYxUWeYDF1hyVr",
         query: movie,
       });
-
     $.ajax({
       url: url,
       method: "GET",
     })
-
       .done(function (nyTimesResponse) {
         $("#film-review").text(nyTimesResponse.results[0].summary_short);
         $("#critic-name").text("~ " + nyTimesResponse.results[0].byline);
