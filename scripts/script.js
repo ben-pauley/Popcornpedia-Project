@@ -58,7 +58,7 @@ $(document).ready(function () {
         newImg.addClass("thumbnail recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
 
-        $("#recent-search-btns").append(newDiv);
+        $("#recent-search-btns").prepend(newDiv);
         newDiv.append(newImg);
       });
     }
@@ -385,6 +385,13 @@ $(document).ready(function () {
 
     $("#filmsTab").append(modalDiv);
     $("#movieName").text(obj.title);
+    $("#movieName").wrap("<a id='getRecMovie' data-close></a>");
+    $("#getRecMovie").click(function () {
+      $(".tabs").css("display", "");
+      $("#tabsContent").css("display", "");
+      $("#recent-search-btns").css("display", "");
+      getMovieDetails(obj.title);
+    });
     $("#movieInfo").html(
       "<b>Year: </b>" +
         obj.year +
@@ -417,7 +424,6 @@ $(document).ready(function () {
         throw err;
       });
   }
-
 });
 
 function openTab(evt, tabName) {
