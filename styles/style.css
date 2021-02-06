@@ -91,7 +91,7 @@ img:hover {
   opacity: 70%;
   font: black;
 }
-.tab-one h2 .tab-two h2 .tab-three h2 {
+#actorName, #directorName, #movieName {
   font-weight: 300;
   font-size: 16pt;
 }
