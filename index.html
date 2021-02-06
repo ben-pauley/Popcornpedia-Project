@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Foundation CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
+      integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
+      crossorigin="anonymous"
+    />
+    <!-- Bulma CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="styles/style.css" />
+    <!-- Adding an icon to the title -->
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <title>Popcornpedia</title>
+    <!--Google Font link -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Adding header that holds the navbar -->
+    <header>
+      <!-- the navbar holds the logo the title and the search input and button -->
+      <nav
+        class="navbar is-fixed-top is-dark"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div class="navbar-start">
+          <figure class="image is-96x96 is-vcentered">
+            <!-- addded -->
+            <img src="assets/logo.png" alt="" id="logo" />
+          </figure>
+          <h2 class="title is-2 ml-3" id="midpage-title">Popcornpedia</h2>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field has-addons">
+              <div class="control">
+                <input
+                  id="movie-input"
+                  type="search"
+                  placeholder="Search for a movie"
+                  class="input is-rounded"
+                  size="50"
+                />
+              </div>
+              <div class="control">
+                <button
+                  id="add-movie"
+                  type="submit"
+                  value="Search"
+                  class="button is-danger is-rounded is-focused"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Adding a full width banner holding the main image -->
+    <section class="hero is-fullheight is-info has-background">
+      <img
+        alt="Fill Murray"
+        class="hero-background is-transparent"
+        src="./assets/movies.jpeg"
+      />
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title is-1" id="popcorn-pedia1">Popcornpedia</h1>
+          <h3 class="subtitle is-2" id="popcorn-pedia2">
+            Your movie encyclopedia
+          </h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Adding the search history section that will hold the last three movies posters -->
+    <section
+      class="columns is-mobile is-centered m-5"
+      id="recent-search-btns"
+      style="display: none"
+    ></section>
+
+    <!-- Adding a container that holds the searched movie information card -->
+    <main id="body-container" class="container" style="display: none">
+      <div class="section">
+        <div class="card is-horizontal columns">
+          <div class="card-image column is-flex is-justify-content-center">
+            <img id="main-film-poster" class="thumbnail" />
+            <div class="card-content column is-flex-grow-5">
+              <header class="card-header">
+                <h3
+                  id="main-film-name"
+                  class="card-header-title title is-3"
+                ></h3>
+              </header>
+              <p id="main-film-synopsis"></p>
+              <br />
+              <p><em id="film-review"></em></p>
+              <p id="critic-name"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Adding actors, crew and suggested films tabs -->
+    <nav
+      class="tabs is-boxed is-centered is-fullwidth is-medium"
+      style="display: none"
+    >
+      <ul>
+        <li class="tab is-active" onclick="openTab(event, 'actorsTab')">
+          <a>
+            <span class="icon is-small"
+              ><i class="fas fa-user-circle" aria-hidden="true"></i
+            ></span>
+            <span>Actors</span>
+          </a>
+        </li>
+        <li class="tab" onclick="openTab(event, 'crewTab')">
+          <a>
+            <span class="icon is-small"
+              ><i class="fas fa-glasses" aria-hidden="true"></i
+            ></span>
+            <span>Crew</span>
+          </a>
+        </li>
+        <li class="tab" onclick="openTab(event, 'filmsTab')">
+          <a>
+            <span class="icon is-small"
+              ><i class="fas fa-film" aria-hidden="true"></i
+            ></span>
+            <span>Films you may like</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div
+      id="tabsContent"
+      class="container section is-horizontal-center"
+      style="display: none"
+    >
+      <div
+        id="actorsTab"
+        class="columns is-mobile is-centered content-tab"
+      ></div>
+      <div
+        id="crewTab"
+        class="columns is-mobile is-centered content-tab"
+        style="display: none"
+      ></div>
+      <div
+        id="filmsTab"
+        class="columns is-mobile is-centered content-tab"
+        style="display: none"
+      ></div>
+    </div>
+
+    <!-- Adding a footer -->
+    <footer class="footer">
+      <div>
+        <p class="footer-text">
+          Expand your knowledge of movies, at <b>Popcornpedia</b> ~ Created By ~
+          <b>Ben, Saadia, Gurvinder & Shaynade</b>.
+        </p>
+      </div>
+    </footer>
+
+    <!-- jQuery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Foundation JavaScript CDN -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
+      integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- link to script file -->
+    <script type="text/javascript" src="scripts/script.js"></script>
+  </body>
+</html>

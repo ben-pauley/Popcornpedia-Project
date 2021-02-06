@@ -1,0 +1,201 @@
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+#pp-logo {
+  width: fit-content;
+  height: auto;
+}
+title {
+  font-family: "Orbitron", sans-serif;
+}
+#midpage-title {
+  color: white;
+  font-family: "Orbitron", sans-serif;
+  line-height: 2;
+}
+#popcorn-pedia1 {
+  font-family: "Orbitron", sans-serif;
+}
+#popcorn-pedia2 {
+  font-family: "Orbitron", sans-serif;
+}
+#main-film-poster {
+  border-radius: 10px;
+  margin: 5px;
+  width: 200px;
+}
+#movie-info {
+  border: 2px solid grey;
+  border-radius: 10px;
+}
+
+​img {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 10px; /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 150px; /* Set a small width */
+}
+/* Add a hover effect (blue shadow) */
+img:hover {
+  box-shadow: 0 0 4px 2px rgba(0, 140, 186, 0.5);
+}
+.is-horizontal-center {
+  justify-content: center;
+}
+.card.is-horizontal {
+  display: flex;
+  flex-basis: 50ex;
+  flex-grow: 0;
+  flex-shrink: 1;
+}
+.card.is-horizontal .card-image {
+  flex: 4;
+  flex-shrink: 1;
+}
+​ .card.is-horizontal .card-image .image img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.card.is-horizontal .card-content {
+  flex: 3;
+}
+.hero.has-background {
+  overflow: hidden;
+  position: relative;
+}
+.hero-background {
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  position: absolute;
+  width: 100%;
+}
+.hero-background.is-transparent {
+  opacity: 0.5;
+}
+.tab-one {
+  color: red;
+  opacity: 70%;
+  font: black;
+}
+.tab-two {
+  color: blue;
+  opacity: 70%;
+  font: black;
+}
+.tab-three {
+  color: rgb(12, 150, 24);
+  opacity: 70%;
+  font: black;
+}
+#actorName,
+#directorName,
+#movieName {
+  font-weight: 300;
+  font-size: 16pt;
+}
+.footer {
+  background-color: rgb(69, 67, 67);
+  padding: 10px;
+}
+.footer-text {
+  color: white;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding-top: 100px;
+  }
+  .recent-search {
+    height: 150px;
+    width: 100px;
+  }
+  .recent-search-col {
+    padding: 0px;
+  }
+  #main-film-poster {
+    height: 150px;
+    width: 100px;
+  }
+  #main-film-synopsis {
+    font-size: 10px;
+  }
+  #main-film-name {
+    font-size: 20px;
+  }
+  .SuggestedFilmImg {
+    height: 150px;
+    margin: 0px;
+    margin-bottom: 25px;
+    width: 100px;
+  }
+  .tabs {
+    font-size: 0.75rem;
+  }
+  #tabsContent {
+    margin: 0px;
+    padding: 0px;
+  }
+  #actorImg0,
+  #actorImg1,
+  #actorImg2,
+  #actorImg3 {
+    height: 80px;
+    margin: 0px;
+    width: 80px;
+  }
+  #directorImg0,
+  #directorImg1,
+  #directorImg2,
+  #directorImg3 {
+    height: 80px;
+    margin: 0px;
+    width: 80px;
+  }
+}
+
+@media only screen and (min-width: 700px) {
+  body {
+    padding-top: 20px;
+  }
+  .recent-search {
+    height: 450px;
+    width: 300px;
+  }
+
+  #main-film-poster {
+    border-radius: 10px;
+    height: 450px;
+    margin: 5px;
+    width: 300px;
+  }
+  .SuggestedFilmImg {
+    height: 450px;
+    margin: 1.5rem;
+    width: 300px;
+  }
+  .tabs {
+    font-size: 1.25rem;
+  }
+  #actorImg0,
+  #actorImg1,
+  #actorImg2,
+  #actorImg3 {
+    height: 200px;
+    margin: 1.5rem;
+    width: 200px;
+  }
+  #directorImg0,
+  #directorImg1,
+  #directorImg2,
+  #directorImg3 {
+    height: 200px;
+    margin: 1.5rem;
+    width: 200px;
+  }
+}
