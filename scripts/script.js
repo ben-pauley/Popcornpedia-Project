@@ -38,6 +38,7 @@ $(document).ready(function () {
     return storedSearches;
   }
 
+  //creates postor's for last three movies searched.
   function renderRecentSearchBtns(recentSearches) {
     $("#recent-search-btns").empty();
     for (var i = 0; i < 3; i++) {
@@ -53,7 +54,7 @@ $(document).ready(function () {
       }).then(function (response) {
         var newImg = $("<img>");
         var newDiv = $("<div>");
-
+        //dynamically creating div to hold the images.
         newDiv.addClass("column is-flex is-justify-content-center");
         newImg.addClass("thumbnail recent-search");
         newImg.attr({ src: response.Poster, alt: response.Title });
@@ -63,7 +64,7 @@ $(document).ready(function () {
       });
     }
   }
-
+  //Main function, retrieves that displays main content(tabs and card for the selected film.)
   function getMovieDetails(movie) {
     $(".tabs").css("display", "");
     $("#tabsContent").css("display", "");
@@ -74,14 +75,14 @@ $(document).ready(function () {
       url: queryURL,
       method: "GET",
     }).then(function (omdbResponse) {
-      $(".hero").css("display", "none");
+      $(".hero").css("display", "none"); //.hero(banner)display is hidden.
       renderMainMovie(omdbResponse, movie);
       renderActorsTab(omdbResponse);
       renderCrewTab(omdbResponse);
       renderSimilarMoviesTab(movie);
     });
   }
-
+  //populating the main movie card.
   function renderMainMovie(omdbResponse, movie) {
     $("#body-container").css("display", "block");
 
@@ -93,7 +94,7 @@ $(document).ready(function () {
 
     nyTimes(movie);
   }
-
+  //populates the actors tab
   function renderActorsTab(omdbResponse) {
     $("#actorsTab").empty();
     $(".reveal-overlay").empty(); // Remove modals content
@@ -107,7 +108,7 @@ $(document).ready(function () {
       fetchActorInfo(actorName, i);
     }
   }
-
+  //getting the actor image from the imdb api.
   function fetchActorImg(name, i) {
     var imdbIdUrl = {
       async: true,
@@ -125,10 +126,10 @@ $(document).ready(function () {
     $.ajax(imdbIdUrl).done(function (imdbResponse) {
       setActorImg(imdbResponse, i);
 
-      $(document).foundation();
+      $(document).foundation(); //Initialisation of the foundation framework.
     });
   }
-
+  //Displays actor image 
   function setActorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
@@ -147,7 +148,7 @@ $(document).ready(function () {
 
     $(document).foundation();
   }
-
+  //Calling the actor information from celebrity ninjas api
   function fetchActorInfo(name, i) {
     var apiKey = "p6kP6K7xyLCFYh3x50LLl2XYe18coWcUYE2hgrqg";
     var queryURL =
@@ -167,7 +168,7 @@ $(document).ready(function () {
       },
     });
   }
-
+  //Creating modals to hold the actors information.
   function actorsModals(celebNinjasResponse, name, i) {
     var age = celebNinjasResponse[0].age;
     var birthday = celebNinjasResponse[0].birthday;
@@ -188,18 +189,19 @@ $(document).ready(function () {
     $("#actorName").text(name);
     $("#actorInfo").html(
       "<b>Age: </b>" +
-        age +
-        "<br>" +
-        "<b>Birthday : <b/>" +
-        birthday +
-        "<br>" +
-        "<b>Nationality : </b>" +
-        nationality +
-        "<br>" +
-        "<b>Occupation : </b>" +
-        occupation
+      age +
+      "<br>" +
+      "<b>Birthday : <b/>" +
+      birthday +
+      "<br>" +
+      "<b>Nationality : </b>" +
+      nationality +
+      "<br>" +
+      "<b>Occupation : </b>" +
+      occupation
     );
   }
+  //populates the crew tab
 
   function renderCrewTab(omdbResponse) {
     $("#crewTab").empty();
@@ -213,7 +215,7 @@ $(document).ready(function () {
       fetchDirectorInfo(directorName, i);
     }
   }
-
+  //retrives image of director from imdb api 
   function fetchDirectorImg(name, i) {
     var imdbIdUrl = {
       async: true,
@@ -234,7 +236,7 @@ $(document).ready(function () {
       $(document).foundation();
     });
   }
-
+  //display the images of the crew in tab.
   function setDirectorImg(imdbResponse, i) {
     var newImg = $("<img>");
 
@@ -252,6 +254,7 @@ $(document).ready(function () {
 
     $(document).foundation();
   }
+  //Calling the crew information from celebrity ninjas api
 
   function fetchDirectorInfo(name, i) {
     var apiKey = "p6kP6K7xyLCFYh3x50LLl2XYe18coWcUYE2hgrqg";
@@ -272,6 +275,7 @@ $(document).ready(function () {
       },
     });
   }
+  //Creating modals to hold the crew information.
 
   function directorModals(celebNinjasResponse, name, i) {
     var age = celebNinjasResponse[0].age;
@@ -293,19 +297,19 @@ $(document).ready(function () {
     $("directorName").addClass("modal-title");
     $("#directorInfo").html(
       "<b>Age: </b>" +
-        age +
-        "<br>" +
-        "<b>Birthday : <b/>" +
-        birthday +
-        "<br>" +
-        "<b>Nationality : </b>" +
-        nationality +
-        "<br>" +
-        "<b>Occupation : </b>" +
-        occupation
+      age +
+      "<br>" +
+      "<b>Birthday : <b/>" +
+      birthday +
+      "<br>" +
+      "<b>Nationality : </b>" +
+      nationality +
+      "<br>" +
+      "<b>Occupation : </b>" +
+      occupation
     );
   }
-
+  //retrives similar films from tastedive api
   function renderSimilarMoviesTab(movie) {
     $("#filmsTab").empty();
 
@@ -319,7 +323,7 @@ $(document).ready(function () {
         q: movie,
         k: "400900-Popcornp-N9NY6GRY",
       },
-
+      //for loop to call only 4 similar films
       success: function (tasteDiveResponse) {
         for (var i = 0; i < 4; i++) {
           fetchPosters(tasteDiveResponse, i);
@@ -327,7 +331,7 @@ $(document).ready(function () {
       },
     });
   }
-
+  // gets posters for similar tab from the omdb api.
   function fetchPosters(tasteDiveResponse, i) {
     const index = i;
 
@@ -343,7 +347,7 @@ $(document).ready(function () {
       displaySimilarMoviesInfo(omdbResponse, index);
     });
   }
-
+  //display poster in similar movie tab.
   function displayPosters(omdbResponse, i) {
     $(document).foundation();
 
@@ -360,7 +364,7 @@ $(document).ready(function () {
     });
     $("#filmsTab").append(newImg);
   }
-
+  //display similar movie informtion from OMDB api.
   function displaySimilarMoviesInfo(omdbResponse, i) {
     var movieObject = {
       title: omdbResponse.Title,
@@ -371,7 +375,7 @@ $(document).ready(function () {
 
     similarMoviesModals(movieObject, i);
   }
-
+  //display info from similar movies object in modal.
   function similarMoviesModals(obj, i) {
     modalDiv = $("<div>");
     modalDiv.addClass("tab-three small reveal");
@@ -392,16 +396,16 @@ $(document).ready(function () {
 
     $("#movieInfo").html(
       "<b>Year: </b>" +
-        obj.year +
-        "<br>" +
-        "<b>Rating : <b/>" +
-        obj.rating +
-        "<br>" +
-        "<b>Plot : </b>" +
-        obj.plot
+      obj.year +
+      "<br>" +
+      "<b>Rating : <b/>" +
+      obj.rating +
+      "<br>" +
+      "<b>Plot : </b>" +
+      obj.plot
     );
   }
-
+  // gets movie review quote from NY time.
   function nyTimes(movie) {
     var url = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
     url +=
@@ -423,7 +427,7 @@ $(document).ready(function () {
       });
   }
 });
-
+//  display tabs on click.
 function openTab(evt, tabName) {
   var i, x, tablinks;
   x = $(".content-tab");
